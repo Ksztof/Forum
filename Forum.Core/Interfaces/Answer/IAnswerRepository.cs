@@ -11,10 +11,7 @@ namespace Forum.Core.Interfaces.Answer
 {
     public interface IAnswerRepository : IRepository<DomainAnswer>
     {
-    }
-
-    public interface ITagRepository : IRepository<Tag>
-    {
         
     }
+
 }

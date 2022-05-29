@@ -3,6 +3,7 @@ using Forum.Core.Interfaces.AppUsers;
 using Forum.Core.Models.Answer;
 using Forum.Core.Models.AppUserModels;
 using Forum.Domain;
+using Forum.Domain.Models.Error;
 using Forum.Domain.Models.Identities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -43,12 +44,12 @@ namespace Forum.WebApp.Controllers
                 throw new Exception("Fill in the required fields of the form!");
             }
             var applicationUser = _usrManager.GetUserAsync(User).Result;
-            var currentAppUserId = applicationUser.UserId;
+            var currentAppUserId = applicationUser.UserId;//TODO: do stałej wywalić we wszstkich pikach 
 
             Answer answer = model.Construct(id, currentAppUserId);
             answer = _answerService.Add(answer);
 
-            
+
 
             return RedirectToAction("Show", "Question");
         }
@@ -74,8 +75,20 @@ namespace Forum.WebApp.Controllers
 
         [Route("/Answer/Update/{id}")]
         [HttpGet]
-        public IActionResult Update()
+        public IActionResult Update(int id)
         {
+            var applicationUser = _usrManager.GetUserAsync(User).Result;
+            var currentAppUserId = applicationUser.UserId;
+            var userIdForAnswer = _answerService.GetBy(id).AppUserId;
+
+            if (userIdForAnswer != currentAppUserId)
+            {
+                var errorContent = "What are you doing here?";
+                return RedirectToAction("ShowError", "Account", new ErrorFM
+                {
+                    ErrorContent = errorContent
+                });
+            }
             return View();
         }
 
@@ -101,6 +114,17 @@ namespace Forum.WebApp.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
+            var applicationUser = _usrManager.GetUserAsync(User).Result;
+            var currentAppUserId = applicationUser.UserId;
+            var userIdForAnswer = _answerService.GetBy(id).AppUserId;
+            if (userIdForAnswer != currentAppUserId)
+            {
+                var errorContent = "What are you doing here?";
+                return RedirectToAction("ShowError", "Account", new ErrorFM
+                {
+                    ErrorContent = errorContent
+                });
+            }
             var answerToDelete = _answerService.GetBy(id);
             var deleteAnswerResult = _answerService.Delete(answerToDelete);
             var questionId = answerToDelete.QuestionId;
@@ -108,17 +132,17 @@ namespace Forum.WebApp.Controllers
         }
 
 
-        [Route("/Answer/Delete/{id}")]
+        /*[Route("/Answer/Delete/{id}")] //TODO: JAVASCRIPT
         [HttpPost]
         public IActionResult GetData(int id)
         {
             var data = _answerService.GetBy(id);
 
             return Ok(JsonConvert.SerializeObject(data, new JsonSerializerSettings { Formatting = Formatting.Indented, ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-        }
+        }*/
     }
 
-    //public class ProperlyController : ApiController bardziej RAW
+    //public class ProperlyController : ApiController bardziej RAW data
     //{
     //    [Route("/Answer/Delete/{id}")]
     //    [HttpPost]

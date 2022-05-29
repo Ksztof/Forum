@@ -12,11 +12,6 @@ namespace Forum.Core.Services.Answer
 {
     public class AnswerService : IAnswerService
     {
-        private IHttpContextAccessor _httpContextAccessor;
-        public AnswerService(IHttpContextAccessor httpContextAccessor)
-        {
-            _httpContextAccessor = httpContextAccessor;
-        }
         private AnswerRepository _answerRepository = null;
         private AnswerRepository answerRepository
         {
@@ -31,10 +26,9 @@ namespace Forum.Core.Services.Answer
         }
 
 
+
         public AnswerClass Add(AnswerClass entity)
         {
-            var user = _httpContextAccessor.HttpContext.User;
-            
             return answerRepository.Add(entity);
         }
 
@@ -57,5 +51,7 @@ namespace Forum.Core.Services.Answer
         {
             return answerRepository.Update(entity);
         }
+
+        
     }
 }

@@ -13,5 +13,6 @@ namespace Forum.Core.Interfaces.BaseInterface
         IEnumerable<T> GetList();
         T GetBy(int id);
         T Update(T entity);
+
     }
 }
