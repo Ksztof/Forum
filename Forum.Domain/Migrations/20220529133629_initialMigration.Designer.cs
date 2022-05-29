@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Forum.Domain.Migrations
 {
     [DbContext(typeof(ForumDb))]
-    [Migration("20220528173146_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220529133629_initialMigration")]
+    partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -91,6 +91,9 @@ namespace Forum.Domain.Migrations
                     b.Property<int>("AnswerId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("CommentToAnswerContent")
                         .IsRequired()
                         .HasColumnType("text");
@@ -108,6 +111,8 @@ namespace Forum.Domain.Migrations
 
                     b.HasIndex("AnswerId");
 
+                    b.HasIndex("AppUserId");
+
                     b.HasIndex("QuestionId");
 
                     b.ToTable("CommentsToAnswer");
@@ -120,6 +125,9 @@ namespace Forum.Domain.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("CommentToAnswerId")
                         .HasColumnType("integer");
@@ -135,6 +143,8 @@ namespace Forum.Domain.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("CommentToAnswerId");
 
@@ -499,6 +509,12 @@ namespace Forum.Domain.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Forum.Domain.AppUser", "AppUser")
+                        .WithMany("CommentsToAnswer")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Forum.Domain.Question", "Question")
                         .WithMany("CommentsToAnswer")
                         .HasForeignKey("QuestionId")
@@ -507,16 +523,26 @@ namespace Forum.Domain.Migrations
 
                     b.Navigation("Answer");
 
+                    b.Navigation("AppUser");
+
                     b.Navigation("Question");
                 });
 
             modelBuilder.Entity("Forum.Domain.CommentToComment", b =>
                 {
+                    b.HasOne("Forum.Domain.AppUser", "AppUser")
+                        .WithMany("CommentsToComment")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Forum.Domain.CommentToAnswer", "CommentToAnswer")
                         .WithMany("Comments")
                         .HasForeignKey("CommentToAnswerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("CommentToAnswer");
                 });
@@ -680,6 +706,10 @@ namespace Forum.Domain.Migrations
             modelBuilder.Entity("Forum.Domain.AppUser", b =>
                 {
                     b.Navigation("Answers");
+
+                    b.Navigation("CommentsToAnswer");
+
+                    b.Navigation("CommentsToComment");
 
                     b.Navigation("Questions");
 

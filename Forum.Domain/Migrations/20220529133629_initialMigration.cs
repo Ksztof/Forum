@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Forum.Domain.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -340,7 +340,8 @@ namespace Forum.Domain.Migrations
                     CommentToAnswerVoteDown = table.Column<int>(type: "integer", nullable: false),
                     CommentToAnswerContent = table.Column<string>(type: "text", nullable: false),
                     AnswerId = table.Column<int>(type: "integer", nullable: false),
-                    QuestionId = table.Column<int>(type: "integer", nullable: false)
+                    QuestionId = table.Column<int>(type: "integer", nullable: false),
+                    AppUserId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -349,6 +350,12 @@ namespace Forum.Domain.Migrations
                         name: "FK_CommentsToAnswer_Answers_AnswerId",
                         column: x => x.AnswerId,
                         principalTable: "Answers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CommentsToAnswer_AppUser_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AppUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -368,11 +375,18 @@ namespace Forum.Domain.Migrations
                     CommentToCommentContent = table.Column<string>(type: "text", nullable: false),
                     CommentToCommentVoteUp = table.Column<int>(type: "integer", nullable: false),
                     CommentToCommentVoteDown = table.Column<int>(type: "integer", nullable: false),
-                    CommentToAnswerId = table.Column<int>(type: "integer", nullable: false)
+                    CommentToAnswerId = table.Column<int>(type: "integer", nullable: false),
+                    AppUserId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CommentsToComment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CommentsToComment_AppUser_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AppUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CommentsToComment_CommentsToAnswer_CommentToAnswerId",
                         column: x => x.CommentToAnswerId,
@@ -469,9 +483,19 @@ namespace Forum.Domain.Migrations
                 column: "AnswerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CommentsToAnswer_AppUserId",
+                table: "CommentsToAnswer",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CommentsToAnswer_QuestionId",
                 table: "CommentsToAnswer",
                 column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CommentsToComment_AppUserId",
+                table: "CommentsToComment",
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CommentsToComment_CommentToAnswerId",
