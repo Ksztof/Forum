@@ -73,41 +73,7 @@ namespace Forum.WebApp.Controllers
             });
         }
 
-        [Authorize]
-        [Route("/AppUser/Delete/{id}/")]
-        [HttpGet]
-        public IActionResult Delete(int id)
-        {
-            var appUserForDelete = _appUserService.GetBy(id);
-            var deleteAppUser = _appUserService.Delete(appUserForDelete);
-
-            return RedirectToAction("Show");
-        }
-
-       /* [Authorize]
-        [Route("/AppUser/Update/{id}")]
-        [HttpGet]
-        public IActionResult Update()
-        {
-            return View();
-        }*/
-
-        /*[Authorize]
-        [Route("/AppUser/Update/{id}")]
-        [HttpPost]
-        public IActionResult Update(int id, FormModelAppUser model)
-        {
-            if (!ModelState.IsValid)
-            {
-                throw new Exception("Fill in the required fields of the form!");
-            }
-            var appUser = _appUserService.GetBy(id);
-            var changedAppUser = model.changeAppUserData(appUser);
-            var updatedUser = _appUserService.Update(appUser);
-
-            return RedirectToAction("Show");
-        }*/
-
+        
 
         public class AppUserUpdateFM 
         {

@@ -100,13 +100,13 @@ namespace Forum.WebApp.Controllers
                     ErrorContent = errorContent
                 });
             }
-                
+
             WebAppUser webAppUser = new WebAppUser();
             webAppUser.Email = model.Email;
             webAppUser.UserName = model.UserName;
             webAppUser.UserId = user.Id;
             var createResult = _usrManager.CreateAsync(webAppUser, model.Password).Result;
-           
+
             if (!createResult.Succeeded)
             {
                 var errorContent = "User can't be created";
@@ -151,10 +151,32 @@ namespace Forum.WebApp.Controllers
 
             var token = _usrManager.GeneratePasswordResetTokenAsync(webAppUser).Result;
             var result = _usrManager.ResetPasswordAsync(webAppUser, token, model.Password);
-            
+
             return RedirectToAction("Show", "AppUser");
         }
-        
+
+        [Authorize]
+        [Route("/AppUser/Delete/{id}/")]
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var webAppUser = _usrManager.Users.Where(u => u.UserId == id).First();
+            var result = _usrManager.DeleteAsync(webAppUser).Result;
+            var appUserForDelete = _appUserService.GetBy(id);
+            var deleteAppUser = _appUserService.Delete(appUserForDelete);
+
+            if (result == null)
+            {
+                var errorContent = "Delete operation was't successful";
+                return RedirectToAction("ShowError", new ErrorFM
+                {
+                    ErrorContent = errorContent
+                });
+            }
+
+            return RedirectToAction("SignOut");
+        }
+
 
         //TODO: obłsuga linków aktywacyjnych  send register link is confirmed kiedy kliknie wl ink, (email veryfgication)
         //Jeżeli nie ma flagi conf. to nie pozwolić.
