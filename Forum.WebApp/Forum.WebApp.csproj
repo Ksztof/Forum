@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\testView.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\testView.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\css\LogIn.css" />
   </ItemGroup>
 
@@ -22,6 +27,14 @@
   <ItemGroup>
     <ProjectReference Include="..\Forum.Core\Forum.Core.csproj" />
     <ProjectReference Include="..\Forum.Domain\Forum.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\testView.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\testView.cshtml" />
   </ItemGroup>
 
 </Project>
