@@ -1,0 +1,39 @@
+﻿body {
+}
+
+.answer_the_question_text {
+    color: white;
+}
+
+.answers_to_question_div:hover {
+    color: yellow;
+    background-color: grey
+}
+
+#answers_to_question_div {
+    background-color: grey;
+    padding-bottom: 15px;
+    padding-top: 15px
+}
+/*link styles*/
+
+.answer_link {
+    color: darkolivegreen;
+}
+
+    .answer_link:hover {
+        color: darkgreen;
+        font-weight: bold;
+    }
+
+.answer_link_delete {
+    color: darksalmon;
+}
+
+    .answer_link_delete:hover {
+        color: red;
+        font-weight: bold;
+    }
+
+
+

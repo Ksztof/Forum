@@ -1,0 +1,27 @@
+﻿@using Forum.Core.Models.Answer
+@{
+    ViewData["Title"] = "Add new answer";
+    @model AnswerAddFM;
+    Layout = "~/Views/Shared/Layouts/__Main.cshtml";
+    <link href="~/css/AddAnswerToQuestion.css" rel="stylesheet">
+}
+
+<div class="col-12 d-flex justify-content-center" id="answer_the_question_div">
+    <h2 class="answer_the_question_text">
+        What is your answer?
+    </h2>
+</div>
+
+<div class="form-group">
+    <form asp-action="Add" asp-controller="AnswerController" method="post">
+        <label asp-for="AnswerContent"></label>
+        <textarea name="AnswerContent" class="form-control" rows="25" placeholder="type your answer" required></textarea>
+
+        <label asp-for="AppUserId"></label>
+        <input name="AppUserId" type="hidden" value="1" />
+
+        <input type="submit" />
+    </form>
+</div>
+
+

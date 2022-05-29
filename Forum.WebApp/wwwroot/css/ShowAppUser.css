@@ -1,0 +1,36 @@
+﻿
+.user_details_text {
+    color: white;
+}
+
+
+
+#user_details_div {
+    background-color: grey;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.user_details_div:hover {
+    color: yellow;
+    background-color: grey;
+}
+/*link styles*/
+
+.app_user_link {
+    color: darkolivegreen;
+}
+
+    .app_user_link:hover {
+        color: darkgreen;
+        font-weight: bold;
+    }
+
+.app_user_link_delete {
+    color: darksalmon;
+}
+
+    .app_user_link_delete:hover {
+        color: red;
+        font-weight: bold;
+    }

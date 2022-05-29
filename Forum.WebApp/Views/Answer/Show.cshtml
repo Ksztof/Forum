@@ -1,0 +1,18 @@
+﻿@using Forum.Core.Models.AppUserModels
+@using Forum.Domain
+@{
+    ViewData["Title"] = "Show answers to question";
+    Layout = "~/Views/Shared/Layouts/__Main.cshtml";
+    <link href="~/css/ShowAnswersToQuestion.css" rel="stylesheet">
+}
+<div class="col-12 d-flex justify-content-center" id="answers_to_question_div">
+    <h2 class="answers_to_question_text">
+        Answers to question
+    </h2>
+</div>
+
+@await Component.InvokeAsync("AnswerShow")
+
+
+@*@await Component.InvokeAsync("AnswerShow", new {formModel = "dwad"})
+*@

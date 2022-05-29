@@ -1,0 +1,21 @@
+﻿
+
+#navbarLogoId {
+    font-size: 70px;
+    color: white
+}
+
+#mainHeader {
+    background-color: black;
+}
+
+.nav-link{
+    color: white;
+}
+.nav-link:hover {
+    color: yellow;
+}
+
+
+/*jak zmienic navbar toogle icon to po zwiuniecięciu się nabara*/
+/*użycie koloru dla body w css dla indexu zmienie tez kolor headera*/

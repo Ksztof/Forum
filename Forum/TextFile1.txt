@@ -1,0 +1,5 @@
+﻿1. Jak rozwiązać kwesię zwijania BD skoro wszystkie tabele są połączone, czy mam wywalac wszystko po kolei, czy jakąś kaskaadą się to robi?
+2.czy jak stworzyłem interfej i repo dla operacji na tabeli UserProfile, to czy dobrze, że to implementuję do kontrolera Appuser
+3/ czemu jest takie         public IEnumerable<T> Data { get; set; } a czasem T cos tam o takie
+4. answer.AppUser co wrzycuić w kontrolerze przy dodawania pytania 
+ 

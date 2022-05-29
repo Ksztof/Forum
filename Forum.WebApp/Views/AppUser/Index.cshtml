@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Index"] = "Home Page";
+    Layout = "~/Views/Shared/Layouts/__Main.cshtml";
+    <link href="~/css/Index.css" rel="stylesheet">
+}
+
+<div class="col-12 d-flex justify-content-center" id="go_to_questions_div">
+    <h2>
+        @Html.ActionLink("Go to questions", "Show", "Question", null, new { @class = "go_to_questions"} )
+    </h2>
+</div>
+
+

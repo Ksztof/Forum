@@ -1,0 +1,14 @@
+﻿using Forum.Core.Interfaces.BaseInterface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CommentToCommentC = Forum.Domain.CommentToComment;
+namespace Forum.Core.Interfaces.CommentToComment
+{
+    public interface ICommentToCommentService: IService<CommentToCommentC>
+    {
+        public IList<CommentToCommentC> GetListWithSpecificAnswerId(int answerId);
+    }
+}

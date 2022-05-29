@@ -1,0 +1,15 @@
+﻿@using Forum.Core.Models.AppUserModels
+@using Forum.Domain
+@{
+    ViewData["Title"] = "comments to coment";
+    Layout = "~/Views/Shared/Layouts/__Main.cshtml";
+    <link href="~/css/ShowCommentsToComment.css" rel="stylesheet">
+}
+
+<div class="col-12 d-flex justify-content-center" id="comments_to_comment_text_div">
+    <h2 class="comments_to_comment_text">
+        Comments to comment
+    </h2>
+</div>
+
+@await Component.InvokeAsync("CommentToCommentShow")

@@ -1,0 +1,29 @@
+﻿@using Forum.Core.Models.AppUserModels
+@using Forum.Domain
+@model ShowListModel<CommentToComment>
+
+
+<div>
+    @{
+
+        <table class="table table-striped">
+            <tr>
+                <th>Comment to comment Id</th>
+                <th>Comment to comment content</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Data)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.CommentToCommentContent</td>
+                    <td>
+                        <span> @Html.ActionLink("Update comment to comment", "Update", new { commentToCommentId = item.Id }, new {@class = "comment_to_answer_link"})</span>
+                        <span> @Html.ActionLink("Delete comment to comment", "Delete", new { commentToCommentId = item.Id }, new {@class = "comment_to_answer_link_delete"})</span>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    }
+</div>

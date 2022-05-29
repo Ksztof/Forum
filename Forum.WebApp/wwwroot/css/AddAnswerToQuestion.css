@@ -1,0 +1,17 @@
+﻿body {
+}
+
+.answer_the_question_text {
+    color: white;
+}
+
+.answer_the_question_div:hover {
+    color: yellow;
+    background-color: grey
+}
+
+#answer_the_question_div {
+    background-color: grey;
+    padding-bottom: 15px;
+    padding-top: 15px
+}

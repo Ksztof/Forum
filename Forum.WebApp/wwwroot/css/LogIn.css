@@ -1,0 +1,15 @@
+﻿.SignIn_text {
+    color: white;
+}
+
+
+#SignIn_div {
+    background-color: grey;
+    padding-bottom: 15px;
+    padding-top: 15px
+}
+
+.SignIn_div:hover {
+    color: yellow;
+    background-color: grey
+}

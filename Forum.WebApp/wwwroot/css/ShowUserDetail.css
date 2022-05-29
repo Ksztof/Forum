@@ -1,0 +1,16 @@
+﻿.user_details_show_text {
+    color: white;
+}
+
+
+
+#user_details_show_div {
+    background-color: grey;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.user_details_show_div:hover {
+    color: yellow;
+    background-color: grey;
+}

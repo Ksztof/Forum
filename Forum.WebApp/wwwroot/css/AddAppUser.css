@@ -1,0 +1,14 @@
+﻿.add_appUser_text {
+    color: white;
+}
+
+.add_appUser_div:hover {
+    color: yellow;
+    background-color: grey
+}
+
+#add_appUser_div {
+    background-color: grey;
+    padding-bottom: 15px;
+    padding-top: 15px
+}

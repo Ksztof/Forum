@@ -1,0 +1,15 @@
+﻿
+.go_to_questions {
+    color: white;
+}
+
+    .go_to_questions:hover {
+        color: yellow;
+        background-color: grey
+    }
+
+#go_to_questions_div {
+    background-color: grey;
+    padding-bottom: 15px;
+    padding-top: 15px
+}

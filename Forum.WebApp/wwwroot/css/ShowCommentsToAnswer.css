@@ -1,0 +1,14 @@
+﻿.comments_to_answer_text {
+    color: white;
+}
+
+.comments_to_answer_div:hover {
+    color: yellow;
+    background-color: grey
+}
+
+#comments_to_answer_div {
+    background-color: grey;
+    padding-bottom: 15px;
+    padding-top: 15px
+}

@@ -1,0 +1,44 @@
+﻿.h2 {
+}
+/*Styles for questions list text*/
+.questions_list_text {
+    color: white;
+}
+
+    .questions_list_text:hover {
+        color: yellow;
+        background-color: grey
+    }
+
+#questions_list_text_div {
+    background-color: grey;
+    padding-bottom: 15px;
+    padding-top: 15px
+}
+
+/*Styles for table with questions*/
+.question_link {
+    color: darkolivegreen;
+}
+
+    .question_link:hover {
+        color: darkgreen;
+        font-weight: bold;
+    }
+
+.question_link_delete {
+    color: darksalmon;
+}
+
+    .question_link_delete:hover {
+        color: red;
+        font-weight: bold;
+    }
+
+.aks_new_question {
+    color: darkgreen;
+}
+
+    .aks_new_question:hover {
+        color:  forestgreen;
+    }

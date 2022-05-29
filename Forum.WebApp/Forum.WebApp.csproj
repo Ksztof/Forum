@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\LogIn.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.LiveShare" Version="1.1.57" />
+    <PackageReference Include="Microsoft.VisualStudio.LiveShare.LanguageServices" Version="2.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Shell.15.0" Version="17.2.32505.113" />
+    <PackageReference Include="Microsoft.VisualStudio.Shell.Framework" Version="17.2.32505.113" />
+    <PackageReference Include="Microsoft.VisualStudio.Shell.Interop" Version="17.2.32505.113" />
+    <PackageReference Include="Microsoft.VisualStudio.VCProjectEngine" Version="17.2.32505.173" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Forum.Core\Forum.Core.csproj" />
+    <ProjectReference Include="..\Forum.Domain\Forum.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,34 @@
+﻿.comments_to_answer_text {
+    color: white;
+}
+
+.comments_to_answer_div:hover {
+    color: yellow;
+    background-color: grey
+}
+
+#comments_to_answer_div {
+    background-color: grey;
+    padding-bottom: 15px;
+    padding-top: 15px
+}
+
+/*link styles*/
+
+.comment_to_answer_link {
+    color: darkolivegreen;
+}
+
+    .comment_to_answer_link:hover {
+        color: darkgreen;
+        font-weight: bold;
+    }
+
+.comment_to_answer_link_delete {
+    color: darksalmon;
+}
+
+    .comment_to_answer_link_delete:hover {
+        color: red;
+        font-weight: bold;
+    }

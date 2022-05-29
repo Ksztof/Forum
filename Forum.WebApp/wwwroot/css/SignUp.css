@@ -1,0 +1,14 @@
+﻿
+.SignUp_text {
+    color: white;
+}
+
+#SignUp_div {
+    background-color: grey;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.SignUp_div:hover {
+    color: yellow;
+    background-color: grey;

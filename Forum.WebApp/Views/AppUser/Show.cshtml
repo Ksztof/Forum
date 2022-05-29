@@ -1,0 +1,16 @@
+﻿@using Forum.Core.Models.AppUserModels
+@using Forum.Domain
+@using Forum.WebApp.Models.Components
+@{
+    ViewData["Title"] = "Show list";
+    Layout = "~/Views/Shared/Layouts/__Main.cshtml";
+    <link href="~/css/ShowAppUser.css" rel="stylesheet">
+}
+
+<div class="col-12 d-flex justify-content-center" id="user_details_div">
+    <h2 class="user_details_text">
+        User details
+    </h2>
+</div>
+
+@await Component.InvokeAsync("AppUserShow")

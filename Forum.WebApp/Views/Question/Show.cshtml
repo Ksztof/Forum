@@ -1,0 +1,17 @@
+﻿@using Forum.Core.Models.AppUserModels
+@using Forum.Domain
+@{
+    ViewData["Title"] = "Show answers list";
+    Layout = "~/Views/Shared/Layouts/__Main.cshtml";
+    <link href="~/css/QuestionsList.css" rel="stylesheet">
+
+}
+
+<div class="col-12 d-flex justify-content-center" id="questions_list_text_div">
+    <h2 class="questions_list_text">
+        Questions list
+    </h2>
+</div>
+
+
+@await Component.InvokeAsync("QuestionShow")

@@ -1,0 +1,12 @@
+﻿@using Forum.Domain
+@model Answer
+
+    <li style="border-radius:10px; background-color:gray; padding:20px;">
+        <span>@Model.AnswerContent</span>
+        <div>
+            <span>@Html.ActionLink("Update answer", "Update", new { id = Model.Id })</span>
+            <span>@Html.ActionLink("Delete answer", "Delete", new { id = Model.Id })</span>
+            <span>@Html.ActionLink("Comment the answer", "Add", "CommentToAnswer", new { questionId = Model.QuestionId,  answerId = Model.Id })</span>
+            <span>@Html.ActionLink("Show comments to answer", "Show", "CommentToAnswer", new { id = Model.Id })</span>
+        </div>
+    </li>

@@ -1,0 +1,14 @@
+﻿.add_comment_to_comment_text {
+    color: white;
+}
+
+.add_comment_to_comment_div:hover {
+    color: yellow;
+    background-color: grey
+}
+
+#add_comment_to_comment_div {
+    background-color: grey;
+    padding-bottom: 15px;
+    padding-top: 15px
+}

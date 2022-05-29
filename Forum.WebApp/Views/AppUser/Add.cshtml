@@ -1,0 +1,47 @@
+﻿@using Forum.Core.Models.AppUserModels
+@{
+    ViewData["Title"] = "Add new user";
+    Layout = "~/Views/Shared/Layouts/__Main.cshtml";
+    <link href="~/css/AddAppUser.css" rel="stylesheet">
+    @model FormModelAppUser
+
+}
+
+@*@section Styles{
+    <style>
+        form{
+            background-color:red;
+        }
+    </style>
+}
+
+@section Scripts{
+    <script>
+console.log("welcome to");
+    </script>
+}*@
+<div class="col-12 d-flex justify-content-center" id="add_appUser_div">
+    <h2 class="add_appUser_text">
+        Add user
+    </h2>
+</div>
+<div class="form-group">
+    <form asp-action="Add" asp-controller="AppUserController" method="post">
+        <label asp-for="Username"></label>
+        <input name="Username" class="form-control" placeholder="User name" required />
+
+        <label asp-for="Surname"></label>
+        <input name="Surname" class="form-control" placeholder="User surname" required />
+
+        <label asp-for="Password"></label>
+        <input name="Password" class="form-control" placeholder="User password" required />
+
+        <label asp-for="DisplayName"></label>
+        <input name="DisplayName" class="form-control" placeholder="Display name" required />
+
+        <input type="submit" />
+
+    </form>
+</div>
+
+

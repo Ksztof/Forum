@@ -1,0 +1,29 @@
+﻿@using Forum.Domain.Models.Error
+@{
+    ViewData["Title"] = "Log in";
+    @model ErrorFM;
+    Layout = "~/Views/Shared/Layouts/__Main.cshtml";
+    <link href="~/css/ShowError.css" rel="stylesheet">
+}
+
+<div class="col-12 d-flex justify-content-center" id="ShowError_div">
+    <div>
+        <h2 class="ShowError_text">
+            Something is wrong!
+        </h2>
+    </div>
+</div>
+<br><br><br>
+<div class="col-12 d-flex justify-content-center">
+    <div>
+        <h3>@Model.ErrorContent</h3>
+    </div>
+</div>
+<div class="col-12 d-flex justify-content-center">
+    <a id="Go_Back_link" href='javascript:history.go(-1)'>Go Back</a>
+</div>
+
+
+
+
+

@@ -1,0 +1,31 @@
+﻿@using Forum.Core.Models.AppUserModels
+@using Forum.Domain
+@model ShowListModel<Question>
+
+<div class="" id="questions_list_div">
+    @{
+
+        <table class="table table-striped">
+            <tr>
+                <th>Question Title</th>
+                <th>Question content</th>
+                <th>@Html.ActionLink("Ask the community", "Add", "Question", null, new { @class = "aks_new_question"} )</th>
+
+            </tr>
+            @foreach (var item in Model.Data)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.QuestionContent</td>
+                    <td>
+                        <span>@Html.ActionLink("Answer", "Add", "Answer", new { id = item.Id }, new { @class = "question_link" })</span>
+                        <span>@Html.ActionLink("Update", "Update", new { id = item.Id }, new { @class = "question_link" })</span>
+                        <span>@Html.ActionLink("details", "Show", "Answer", new { id = item.Id }, new { @class = "question_link" })</span>
+                        <span>@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "question_link_delete" })</span>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    }
+</div>

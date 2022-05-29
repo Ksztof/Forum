@@ -1,0 +1,19 @@
+﻿body {
+}
+
+.update_comments_to_comment_text {
+    color: white;
+}
+
+
+
+#update_comments_to_comment_text_div {
+    background-color: grey;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.update_comments_to_comment_text_div:hover {
+    color: yellow;
+    background-color: grey;
+}
