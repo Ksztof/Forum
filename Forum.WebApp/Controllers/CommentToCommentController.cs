@@ -2,6 +2,7 @@
 using Forum.Core.Models.AppUserModels;
 using Forum.Core.Models.CommentToComment;
 using Forum.Domain;
+using Forum.Domain.Models.Error;
 using Forum.Domain.Models.Identities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -68,6 +69,18 @@ namespace Forum.WebApp.Controllers
         [HttpGet]
         public IActionResult Delete(int commentToCommentId)
         {
+            var applicationUser = _usrManager.GetUserAsync(User).Result;
+            var currentAppUserId = applicationUser.UserId;
+            var userIdForCommentToComment = _commentToCommentService.GetBy(commentToCommentId).AppUserId;
+
+            if (userIdForCommentToComment != currentAppUserId)
+            {
+                var errorContent = "What are you doing here?";
+                return RedirectToAction("ShowError", "Account", new ErrorFM
+                {
+                    ErrorContent = errorContent
+                });
+            }
             var commentToComment = _commentToCommentService.GetBy(commentToCommentId);
             var deleteCommentToCommentResult = _commentToCommentService.Delete(commentToComment);
             var commentToAnswerId = commentToComment.CommentToAnswerId;
@@ -77,8 +90,20 @@ namespace Forum.WebApp.Controllers
 
         [Route("/CommentToComment/Update/{commentToCommentId}")]
         [HttpGet]
-        public IActionResult Update()
+        public IActionResult Update(int commentToCommentId)
         {
+            var applicationUser = _usrManager.GetUserAsync(User).Result;
+            var currentAppUserId = applicationUser.UserId;
+            var userIdForCommentToComment = _commentToCommentService.GetBy(commentToCommentId).AppUserId;
+
+            if (userIdForCommentToComment != currentAppUserId)
+            {
+                var errorContent = "What are you doing here?";
+                return RedirectToAction("ShowError", "Account", new ErrorFM
+                {
+                    ErrorContent = errorContent
+                });
+            }
             return View();
         }
 
