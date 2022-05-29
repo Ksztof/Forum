@@ -2,6 +2,7 @@
 using Forum.Core.Models.AppUserModels;
 using Forum.Core.Models.Question;
 using Forum.Domain;
+using Forum.Domain.Models.Error;
 using Forum.Domain.Models.Identities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -67,6 +68,17 @@ namespace Forum.WebApp.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
+            var applicationUser = _usrManager.GetUserAsync(User).Result;
+            var currentAppUserId = applicationUser.UserId;
+            var userIdForQuestion = _questionService.GetBy(id).AppUserId;
+            if (userIdForQuestion != currentAppUserId)
+            {
+                var errorContent = "What are you doing here?";
+                return RedirectToAction("ShowError", "Account", new ErrorFM
+                {
+                    ErrorContent = errorContent
+                });
+            }
             var question = _questionService.GetBy(id);
             var questionDeleteResult = _questionService.Delete(question);
 
@@ -76,8 +88,20 @@ namespace Forum.WebApp.Controllers
 
         [Route("/Question/Update/{id}")]
         [HttpGet]
-        public IActionResult Update()
+        public IActionResult Update(int id)
         {
+            var applicationUser = _usrManager.GetUserAsync(User).Result;
+            var currentAppUserId = applicationUser.UserId;
+            var userIdForQuestion = _questionService.GetBy(id).AppUserId;
+
+            if (userIdForQuestion != currentAppUserId)
+            {
+                var errorContent = "What are you doing here?";
+                return RedirectToAction("ShowError", "Account", new ErrorFM
+                {
+                    ErrorContent = errorContent
+                });
+            }
             return View();
         }
 
@@ -85,7 +109,7 @@ namespace Forum.WebApp.Controllers
 
         [Route("/Question/Update/{id}")]
         [HttpPost]
-        public IActionResult Update(int id, QuestionAddFM model)//utowrzyc formularz przesłac id hidden value
+        public IActionResult Update(int id, QuestionAddFM model)
         {
             if (!ModelState.IsValid)
             {
