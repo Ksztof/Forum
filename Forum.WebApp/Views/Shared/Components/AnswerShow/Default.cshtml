@@ -7,23 +7,29 @@
 <div class="" id="questions_list_div">
     @{
 
-        <table class="table table-striped">
-            <tr>
-                <th>Answer content</th>
-                <th></th>
-            </tr>
-            @foreach (var item in Model.Data)
-            {
+            <table class="table table-striped">
                 <tr>
-                    <td>@item.AnswerContent</td>
-                    <td>
-                        <span>@Html.ActionLink("Comment the answer", "Add", "CommentToAnswer", new { questionId = item.QuestionId,  answerId = item.Id }, new {@class = "answer_link"})</span>
-                        <span>@Html.ActionLink("Update answer", "Update", new { id = item.Id }, new {@class = "answer_link"})</span>
-                        <span>@Html.ActionLink("Show comments to answer", "Show", "CommentToAnswer", new { id = item.Id }, new {@class = "answer_link"})</span>
-                        <span>@Html.ActionLink("Delete answer", "Delete", new { id = item.Id }, new {@class = "answer_link_delete"})</span>
-                    </td>
+                    <th>Answer content</th>
+                    <th></th>
                 </tr>
+                @foreach (var item in Model.Data)
+            {
+                    <tr>
+                        <td>@item.AnswerContent</td>
+                        <td>
+                        @if (item.AppUserId == Model.CurrentAppUserId)
+                        {
+                            <span>@Html.ActionLink("Comment the answer", "Add", "CommentToAnswer", new { questionId = item.QuestionId,  answerId = item.Id }, new {@class = "answer_link"})</span>
+                            <span>@Html.ActionLink("Update answer", "Update", new { id = item.Id }, new {@class = "answer_link"})</span>
+                            <span>@Html.ActionLink("Show comments to answer", "Show", "CommentToAnswer", new { id = item.Id }, new {@class = "answer_link"})</span>
+                            <span>@Html.ActionLink("Delete answer", "Delete", new { id = item.Id }, new {@class = "answer_link_delete"})</span>
+                        }else{
+                            <span>@Html.ActionLink("Comment the answer", "Add", "CommentToAnswer", new { questionId = item.QuestionId,  answerId = item.Id }, new {@class = "answer_link"})</span>
+                            <span>@Html.ActionLink("Show comments to answer", "Show", "CommentToAnswer", new { id = item.Id }, new {@class = "answer_link"})</span>
+                        }
+                        </td>
+                    </tr>
             }
-        </table>
+            </table>
     }
 </div>
