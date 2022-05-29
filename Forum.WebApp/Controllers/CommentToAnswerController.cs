@@ -2,6 +2,7 @@
 using Forum.Core.Models.AppUserModels;
 using Forum.Core.Models.CommentToAnswer;
 using Forum.Domain;
+using Forum.Domain.Models.Error;
 using Forum.Domain.Models.Identities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -14,11 +15,11 @@ namespace Forum.WebApp.Controllers
     {
         private readonly ILogger<CommentToAnswerController> _logger;
         private ICommentToAnswerService _commentToAnswerService;
-        private UserManager<WebAppUser> usrManager;
+        private UserManager<WebAppUser> _usrManager;
         public CommentToAnswerController(ILogger<CommentToAnswerController> logger, ICommentToAnswerService commentToAnswerService, UserManager<WebAppUser> usrManager)
         {
             this._commentToAnswerService = commentToAnswerService;
-            this.usrManager = usrManager;
+            this._usrManager = usrManager;
             _logger = logger;
         }
         [HttpGet]
@@ -36,7 +37,7 @@ namespace Forum.WebApp.Controllers
             {
                 throw new Exception("Fill in the required fields of the form!");
             }
-            var appUser = usrManager.GetUserAsync(User).Result;
+            var appUser = _usrManager.GetUserAsync(User).Result;
             var appUserId = appUser.UserId;
 
             CommentToAnswer commentToAnswer = model.Construct(answerId, questionId, appUserId);
@@ -50,7 +51,7 @@ namespace Forum.WebApp.Controllers
         public IActionResult Show(int id)
         {
             var commentToAnswerList = _commentToAnswerService.GetListWithSpecificAnswerId(id);
-            var appUser = usrManager.GetUserAsync(User).Result;
+            var appUser = _usrManager.GetUserAsync(User).Result;
             var appUserId = appUser.UserId;
             return View(new ShowListModel<CommentToAnswer>
             {
@@ -63,6 +64,19 @@ namespace Forum.WebApp.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
+
+            var applicationUser = _usrManager.GetUserAsync(User).Result;
+            var currentAppUserId = applicationUser.UserId;
+            var userIdForCommentToAnswer = _commentToAnswerService.GetBy(id).AppUserId;
+            if (userIdForCommentToAnswer != currentAppUserId)
+            {
+                var errorContent = "What are you doing here?";
+                return RedirectToAction("ShowError", "Account", new ErrorFM
+                {
+                    ErrorContent = errorContent
+                });
+            }
+
             var commentToAnswer = _commentToAnswerService.GetBy(id);
             var deleteCommentToAnswerResult = _commentToAnswerService.Delete(commentToAnswer);
             var AnswerId = commentToAnswer.AnswerId;
@@ -71,8 +85,19 @@ namespace Forum.WebApp.Controllers
 
         [Route("/CommentToAnswer/Update/{id}")]
         [HttpGet]
-        public IActionResult Update()
+        public IActionResult Update(int id)
         {
+            var applicationUser = _usrManager.GetUserAsync(User).Result;
+            var currentAppUserId = applicationUser.UserId;
+            var userIdForCommentToAnswer = _commentToAnswerService.GetBy(id).AppUserId;
+            if (userIdForCommentToAnswer != currentAppUserId)
+            {
+                var errorContent = "What are you doing here?";
+                return RedirectToAction("ShowError", "Account", new ErrorFM
+                {
+                    ErrorContent = errorContent
+                });
+            }
             return View();
         }
 
