@@ -38,6 +38,7 @@ namespace Forum.WebApp.Controllers
             }
             var appUser = usrManager.GetUserAsync(User).Result;
             var appUserId = appUser.UserId;
+
             CommentToAnswer commentToAnswer = model.Construct(answerId, questionId, appUserId);
 
             var commentToAnswerResult = _commentToAnswerService.Add(commentToAnswer);
@@ -48,13 +49,13 @@ namespace Forum.WebApp.Controllers
         [Route("CommentToAnswer/Show/{id}")]
         public IActionResult Show(int id)
         {
-            /*var allCommentToAnswerList = _commentToAnswerService.GetList();
-            var commentToAnswerList = allCommentToAnswerList.Where(x => x.AnswerId == id);*/
             var commentToAnswerList = _commentToAnswerService.GetListWithSpecificAnswerId(id);
-
+            var appUser = usrManager.GetUserAsync(User).Result;
+            var appUserId = appUser.UserId;
             return View(new ShowListModel<CommentToAnswer>
             {
                 Data = commentToAnswerList,
+                CurrentAppUserId = appUserId,
             });
         }
 
@@ -88,7 +89,7 @@ namespace Forum.WebApp.Controllers
             var commentToAnswer = _commentToAnswerService.GetBy(id);
             model.changeCommentToAnswerData(commentToAnswer);
             var questionUpdateResult = _commentToAnswerService.Update(commentToAnswer);
-            
+
             return RedirectToAction("Show", new { id = commentToAnswer.AnswerId });
         }
 

@@ -39,10 +39,13 @@ namespace Forum.WebApp.Controllers
             }
             var appUser = _usrManager.GetUserAsync(User).Result;
             var appUserId = appUser.UserId;
+
             CommentToComment commentToComment = model.Construct(commentToCommentId, appUserId);
-            var commentToAnswerIdc = commentToComment.CommentToAnswerId;
+            var commentToAnswerId = commentToComment.CommentToAnswerId;
+
             _commentToCommentService.Add(commentToComment);
-            return RedirectToAction("Show", new { id = commentToAnswerIdc });
+
+            return RedirectToAction("Show", new { id = commentToAnswerId });
         }
 
         [HttpGet]

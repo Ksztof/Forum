@@ -12,13 +12,13 @@ namespace Forum.Core.Models.Question
         public int AppUserId { get; set; }
 
 
-        public QuestionC Construct()
+        public QuestionC Construct(int appUserId)
         {
             return new QuestionC()
             {
-                Title = Title,
-                QuestionContent = QuestionContent,
-                AppUserId = AppUserId
+                Title = this.Title,
+                QuestionContent = this.QuestionContent,
+                AppUserId = appUserId,
             };
         }
 

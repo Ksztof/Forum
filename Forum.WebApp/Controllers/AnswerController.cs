@@ -42,10 +42,14 @@ namespace Forum.WebApp.Controllers
             {
                 throw new Exception("Fill in the required fields of the form!");
             }
+            var applicationUser = _usrManager.GetUserAsync(User).Result;
+            var currentAppUserId = applicationUser.UserId;
 
-            Answer answer = model.Construct(id);
+            Answer answer = model.Construct(id, currentAppUserId);
             answer = _answerService.Add(answer);
-            _usrManager.GetUserId(HttpContext.User);
+
+            
+
             return RedirectToAction("Show", "Question");
         }
 

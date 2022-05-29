@@ -2,7 +2,9 @@
 using Forum.Core.Models.AppUserModels;
 using Forum.Core.Models.Question;
 using Forum.Domain;
+using Forum.Domain.Models.Identities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.WebApp.Controllers
@@ -12,11 +14,13 @@ namespace Forum.WebApp.Controllers
     {
         private readonly ILogger<QuestionController> _logger;
         private IQuestionService _questionService;
+        private UserManager<WebAppUser> _usrManager;
         //dependency injection i reverse
-        public QuestionController(ILogger<QuestionController> logger, IQuestionService questionService)
+        public QuestionController(ILogger<QuestionController> logger, IQuestionService questionService, UserManager<WebAppUser> usrManager)
         {
             this._questionService = questionService;
-            _logger = logger;
+            this._logger = logger;
+            this._usrManager = usrManager;
         }
 
 
@@ -35,8 +39,10 @@ namespace Forum.WebApp.Controllers
             {
                 throw new Exception("Fill in the required fields of the form!");
             }
+            var appUser = _usrManager.GetUserAsync(User).Result;
+            var appUserId = appUser.UserId;
 
-            Question question = model.Construct();
+            Question question = model.Construct(appUserId);
             question = _questionService.Add(question);
 
             return RedirectToAction("Show");
@@ -47,10 +53,12 @@ namespace Forum.WebApp.Controllers
         public IActionResult Show()
         {
             var questionsList = _questionService.GetList();
-
+            var appUser = _usrManager.GetUserAsync(User).Result;
+            var appUserId = appUser.UserId;
             return View(new ShowListModel<Question>
             {
                 Data = questionsList,
+                CurrentAppUserId = appUserId,
             });
         }
 
