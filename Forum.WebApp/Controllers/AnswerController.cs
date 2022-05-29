@@ -15,14 +15,14 @@ namespace Forum.WebApp.Controllers
     [Authorize]
     public class AnswerController : Controller
     {
-        private UserManager<WebAppUser> usrManager;
+        private UserManager<WebAppUser> _usrManager;
         private readonly ILogger<AnswerController> _logger;
         private IAnswerService _answerService;
         public AnswerController(ILogger<AnswerController> logger, IAnswerService answerService, UserManager<WebAppUser> usrManager)
         {
             this._answerService = answerService;
             _logger = logger;
-            this.usrManager = usrManager;
+            this._usrManager = usrManager;
         }
 
 
@@ -45,7 +45,7 @@ namespace Forum.WebApp.Controllers
 
             Answer answer = model.Construct(id);
             answer = _answerService.Add(answer);
-            usrManager.GetUserId(HttpContext.User);
+            _usrManager.GetUserId(HttpContext.User);
             return RedirectToAction("Show", "Question");
         }
 
@@ -54,7 +54,7 @@ namespace Forum.WebApp.Controllers
         [HttpGet]
         public IActionResult Show(int id)
         {
-            var applicationUser = usrManager.GetUserAsync(User).Result;
+            var applicationUser = _usrManager.GetUserAsync(User).Result;
             var currentAppUserId = applicationUser.UserId;
 
             var allAnswersToQuestion = _answerService.GetList();

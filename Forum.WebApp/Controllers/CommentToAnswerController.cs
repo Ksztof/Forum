@@ -2,7 +2,9 @@
 using Forum.Core.Models.AppUserModels;
 using Forum.Core.Models.CommentToAnswer;
 using Forum.Domain;
+using Forum.Domain.Models.Identities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.WebApp.Controllers
@@ -12,9 +14,11 @@ namespace Forum.WebApp.Controllers
     {
         private readonly ILogger<CommentToAnswerController> _logger;
         private ICommentToAnswerService _commentToAnswerService;
-        public CommentToAnswerController(ILogger<CommentToAnswerController> logger, ICommentToAnswerService commentToAnswerService)
+        private UserManager<WebAppUser> usrManager;
+        public CommentToAnswerController(ILogger<CommentToAnswerController> logger, ICommentToAnswerService commentToAnswerService, UserManager<WebAppUser> usrManager)
         {
             this._commentToAnswerService = commentToAnswerService;
+            this.usrManager = usrManager;
             _logger = logger;
         }
         [HttpGet]
@@ -32,8 +36,9 @@ namespace Forum.WebApp.Controllers
             {
                 throw new Exception("Fill in the required fields of the form!");
             }
-
-            CommentToAnswer commentToAnswer = model.Construct(answerId, questionId);
+            var appUser = usrManager.GetUserAsync(User).Result;
+            var appUserId = appUser.UserId;
+            CommentToAnswer commentToAnswer = model.Construct(answerId, questionId, appUserId);
 
             var commentToAnswerResult = _commentToAnswerService.Add(commentToAnswer);
             return RedirectToAction("Show", "Answer", new { id = questionId });
@@ -74,14 +79,14 @@ namespace Forum.WebApp.Controllers
 
         [Route("/CommentToAnswer/Update/{id}")]
         [HttpPost]
-        public IActionResult Update(int id, UpdateCommentToAnswerFM model)//utowrzyc formularz przesłac id hidden value
+        public IActionResult Update(int id, UpdateCommentToAnswerFM model)
         {
             if (!ModelState.IsValid)
             {
                 throw new Exception("Fill in the required fields of the form!");
             }
             var commentToAnswer = _commentToAnswerService.GetBy(id);
-            model.changeCommentToAnswerData(commentToAnswer);//jak zrobic zeby pustych
+            model.changeCommentToAnswerData(commentToAnswer);
             var questionUpdateResult = _commentToAnswerService.Update(commentToAnswer);
             
             return RedirectToAction("Show", new { id = commentToAnswer.AnswerId });

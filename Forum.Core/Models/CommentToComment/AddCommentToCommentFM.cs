@@ -11,13 +11,14 @@ namespace Forum.Core.Models.CommentToComment
     {
         [Required]
         public string CommentToCommentContent { get; set; }
-
-        public CommentToCommentC Construct(int commentToCommentId)
+        public int AppUserId { get; set; }  
+        public CommentToCommentC Construct(int commentToCommentId, int appUserId)
         {
             return new CommentToCommentC()
             {
                 CommentToCommentContent = CommentToCommentContent,
                 CommentToAnswerId = commentToCommentId,
+                AppUserId = appUserId,
             };
         }
 

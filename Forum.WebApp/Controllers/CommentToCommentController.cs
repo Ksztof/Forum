@@ -2,7 +2,9 @@
 using Forum.Core.Models.AppUserModels;
 using Forum.Core.Models.CommentToComment;
 using Forum.Domain;
+using Forum.Domain.Models.Identities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.WebApp.Controllers
@@ -12,11 +14,12 @@ namespace Forum.WebApp.Controllers
     {
         private readonly ILogger<CommentToCommentController> _logger;
         private ICommentToCommentService _commentToCommentService;
-
-        public CommentToCommentController(ILogger<CommentToCommentController> logger, ICommentToCommentService commentToCommentService)
+        private UserManager<WebAppUser> _usrManager;
+        public CommentToCommentController(ILogger<CommentToCommentController> logger, ICommentToCommentService commentToCommentService, UserManager<WebAppUser> usrManager)
         {
             _logger = logger;
             this._commentToCommentService = commentToCommentService;
+            this._usrManager = usrManager;
         }
 
         [Route("CommentToComment/Add/{commentToCommentId}")]
@@ -34,7 +37,9 @@ namespace Forum.WebApp.Controllers
             {
                 throw new Exception("Fill in the required fields of the form!");
             }
-            CommentToComment commentToComment = model.Construct(commentToCommentId);
+            var appUser = _usrManager.GetUserAsync(User).Result;
+            var appUserId = appUser.UserId;
+            CommentToComment commentToComment = model.Construct(commentToCommentId, appUserId);
             var commentToAnswerIdc = commentToComment.CommentToAnswerId;
             _commentToCommentService.Add(commentToComment);
             return RedirectToAction("Show", new { id = commentToAnswerIdc });
@@ -44,10 +49,13 @@ namespace Forum.WebApp.Controllers
         [Route("CommentToComment/Show/{commentToAnswerId}")]
         public IActionResult Show(int commentToAnswerId)
         {
+            var appUser = _usrManager.GetUserAsync(User).Result;
+            var appUserId = appUser.UserId;
             var commentToAnswerList = _commentToCommentService.GetListWithSpecificAnswerId(commentToAnswerId);
             return View(new ShowListModel<CommentToComment>
             {
                 Data = commentToAnswerList,
+                CurrentAppUserId = appUserId,
             });
         }
 

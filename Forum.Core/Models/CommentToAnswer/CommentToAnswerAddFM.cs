@@ -13,15 +13,16 @@ namespace Forum.Core.Models.CommentToAnswer
         public int AnswerId { get; set; }
         [Required]
         public string CommentToAnswerContent { get; set; }
+        public int AppUserId { get; set; }
 
-
-        public CommentToAnswerC Construct(int answerId, int questionId)
+        public CommentToAnswerC Construct(int answerId, int questionId, int appUserId)
         {
             return new CommentToAnswerC()
             {
                 AnswerId = answerId,
                 CommentToAnswerContent = CommentToAnswerContent,
-                QuestionId = questionId
+                QuestionId = questionId,
+                AppUserId = appUserId
             };
         }
 
