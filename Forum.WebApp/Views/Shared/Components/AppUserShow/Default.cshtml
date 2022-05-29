@@ -16,9 +16,16 @@
             <td>@item.Id</td>
             <td>@item.Username</td>
             <td>
-                <span>@Html.ActionLink("Show details", "Show", "UserProfile", new { id = item.Id }, new {@class = "app_user_link"})</span>
-                <span>@Html.ActionLink("Update user data", "Update", new { id = item.Id }, new {@class = "app_user_link"})</span>
-                <span>@Html.ActionLink("Delete user data", "Delete", new { id = item.Id }, new {@class = "app_user_link_delete"})</span>
+                @if (item.Id == Model.CurrentAppUserId)
+                {
+                    <span>@Html.ActionLink("Show details", "Show", "UserProfile", new { id = item.Id }, new {@class = "app_user_link"})</span>
+                    <span>@Html.ActionLink("Update user data", "Update", new { id = item.Id }, new {@class = "app_user_link"})</span>
+                    <span>@Html.ActionLink("Delete user data", "Delete", new { id = item.Id }, new {@class = "app_user_link_delete"})</span>
+                }
+                else
+                {
+                    <span>@Html.ActionLink("Show details", "Show", "UserProfile", new { id = item.Id }, new {@class = "app_user_link"})</span>
+                }
             </td>
         </tr>
     }

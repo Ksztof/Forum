@@ -18,8 +18,15 @@
                     <td>@item.Id</td>
                     <td>@item.CommentToCommentContent</td>
                     <td>
-                        <span> @Html.ActionLink("Update comment to comment", "Update", new { commentToCommentId = item.Id }, new {@class = "comment_to_answer_link"})</span>
-                        <span> @Html.ActionLink("Delete comment to comment", "Delete", new { commentToCommentId = item.Id }, new {@class = "comment_to_answer_link_delete"})</span>
+                        @if (item.AppUserId == Model.CurrentAppUserId)
+                        {
+                            <span> @Html.ActionLink("Update comment to comment", "Update", new { commentToCommentId = item.Id }, new {@class = "comment_to_answer_link"})</span>
+                            <span> @Html.ActionLink("Delete comment to comment", "Delete", new { commentToCommentId = item.Id }, new {@class = "comment_to_answer_link_delete"})</span>
+                        }
+                        else
+                        {
+                            
+                        }
                     </td>
                 </tr>
             }

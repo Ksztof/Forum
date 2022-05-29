@@ -18,10 +18,18 @@
                     <td>@item.Title</td>
                     <td>@item.QuestionContent</td>
                     <td>
-                        <span>@Html.ActionLink("Answer", "Add", "Answer", new { id = item.Id }, new { @class = "question_link" })</span>
-                        <span>@Html.ActionLink("Update", "Update", new { id = item.Id }, new { @class = "question_link" })</span>
-                        <span>@Html.ActionLink("details", "Show", "Answer", new { id = item.Id }, new { @class = "question_link" })</span>
-                        <span>@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "question_link_delete" })</span>
+                        @if (item.AppUserId == Model.CurrentAppUserId)
+                        {
+                            <span>@Html.ActionLink("Answer", "Add", "Answer", new { id = item.Id }, new { @class = "question_link" })</span>
+                            <span>@Html.ActionLink("Update", "Update", new { id = item.Id }, new { @class = "question_link" })</span>
+                            <span>@Html.ActionLink("details", "Show", "Answer", new { id = item.Id }, new { @class = "question_link" })</span>
+                            <span>@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "question_link_delete" })</span>
+                        }
+                        else
+                        {
+                            <span>@Html.ActionLink("Answer", "Add", "Answer", new { id = item.Id }, new { @class = "question_link" })</span>
+                            <span>@Html.ActionLink("details", "Show", "Answer", new { id = item.Id }, new { @class = "question_link" })</span>
+                        }
                     </td>
                 </tr>
             }

@@ -20,8 +20,6 @@ namespace Forum.Domain
         public IEnumerable<Answer>? Answers { get; set; }
         public IEnumerable<CommentToAnswer>? CommentsToAnswer { get; set; }
         public IEnumerable<CommentToComment>? CommentsToComment { get; set; }
-
-
         public UserProfile? UserProfile { get; set; }    
     }
 }

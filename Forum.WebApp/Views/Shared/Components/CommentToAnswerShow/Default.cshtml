@@ -17,10 +17,18 @@
                     <td>@item.AnswerId</td>
                     <td>@item.CommentToAnswerContent</td>
                     <td>
-                        <span>@Html.ActionLink("Comment", "Add", "CommentToComment", new { commentToCommentId = item.Id }, new {@class = "comment_to_answer_link"})</span>
-                        <span>@Html.ActionLink("Update", "Update", "CommentToAnswer", new { id = item.Id }, new {@class = "comment_to_answer_link"})</span>
-                        <span>@Html.ActionLink("Show comments", "Show", "CommentToComment", new { commentToAnswerId = item.Id }, new {@class = "comment_to_answer_link"})</span>
-                        <span> @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new {@class = "comment_to_answer_link_delete"})</span>
+                        @if (item.AppUserId == Model.CurrentAppUserId)
+                        {
+                            <span>@Html.ActionLink("Comment", "Add", "CommentToComment", new { commentToCommentId = item.Id }, new {@class = "comment_to_answer_link"})</span>
+                            <span>@Html.ActionLink("Update", "Update", "CommentToAnswer", new { id = item.Id }, new {@class = "comment_to_answer_link"})</span>
+                            <span>@Html.ActionLink("Show comments", "Show", "CommentToComment", new { commentToAnswerId = item.Id }, new {@class = "comment_to_answer_link"})</span>
+                            <span> @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new {@class = "comment_to_answer_link_delete"})</span>
+                        }
+                        else
+                        {
+                            <span>@Html.ActionLink("Comment", "Add", "CommentToComment", new { commentToCommentId = item.Id }, new {@class = "comment_to_answer_link"})</span>
+                            <span>@Html.ActionLink("Show comments", "Show", "CommentToComment", new { commentToAnswerId = item.Id }, new {@class = "comment_to_answer_link"})</span>
+                        }
                     </td>
                 </tr>
             }

@@ -23,7 +23,9 @@
                             <span>@Html.ActionLink("Update answer", "Update", new { id = item.Id }, new {@class = "answer_link"})</span>
                             <span>@Html.ActionLink("Show comments to answer", "Show", "CommentToAnswer", new { id = item.Id }, new {@class = "answer_link"})</span>
                             <span>@Html.ActionLink("Delete answer", "Delete", new { id = item.Id }, new {@class = "answer_link_delete"})</span>
-                        }else{
+                        }
+                        else
+                        {
                             <span>@Html.ActionLink("Comment the answer", "Add", "CommentToAnswer", new { questionId = item.QuestionId,  answerId = item.Id }, new {@class = "answer_link"})</span>
                             <span>@Html.ActionLink("Show comments to answer", "Show", "CommentToAnswer", new { id = item.Id }, new {@class = "answer_link"})</span>
                         }
