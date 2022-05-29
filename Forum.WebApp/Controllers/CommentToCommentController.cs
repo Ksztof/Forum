@@ -48,6 +48,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("Show", new { id = commentToAnswerId });
         }
 
+
         [HttpGet]
         [Route("CommentToComment/Show/{commentToAnswerId}")]
         public IActionResult Show(int commentToAnswerId)
@@ -61,6 +62,7 @@ namespace Forum.WebApp.Controllers
                 CurrentAppUserId = appUserId,
             });
         }
+
 
         [Route("/CommentToComment/Delete/{commentToCommentId}")]
         [HttpGet]

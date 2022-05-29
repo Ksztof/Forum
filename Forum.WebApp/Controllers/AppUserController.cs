@@ -1,7 +1,9 @@
 ﻿using Forum.Core.Interfaces.AppUsers;
 using Forum.Core.Models.AppUserModels;
 using Forum.Domain;
+using Forum.Domain.Models.Identities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -12,13 +14,14 @@ namespace Forum.WebApp.Controllers
         private readonly ILogger<AppUserController> _logger;
         private IAppUserService _appUserService;
         private IUserProfileService _profileService;
+        private UserManager<WebAppUser> _usrManager;
 
-
-        public AppUserController(ILogger<AppUserController> logger, IAppUserService userService, IUserProfileService profileService)
+        public AppUserController(ILogger<AppUserController> logger, IAppUserService userService, IUserProfileService profileService, UserManager<WebAppUser> usrManager)
         {
             this._appUserService = userService;
-            _logger = logger;
-            _profileService = profileService;
+            this._logger = logger;
+            this._profileService = profileService;
+            this._usrManager = usrManager;
         }
 
 
@@ -44,9 +47,12 @@ namespace Forum.WebApp.Controllers
             {
                 throw new Exception("Fill in the required fields of the form!");
             }
+            var applicationUser = _usrManager.GetUserAsync(User).Result;
+            var currentAppUserId = applicationUser.UserId;
 
             AppUser appUser = model.Construct();
             appUser = _appUserService.Add(appUser);
+
 
             return RedirectToAction("Index");
         }
@@ -57,9 +63,13 @@ namespace Forum.WebApp.Controllers
         {
             var appUsersList = _appUserService.GetList();
 
+            var applicationUser = _usrManager.GetUserAsync(User).Result;
+            var currentAppUserId = applicationUser.UserId;
+
             return View(new ShowListModel<AppUser>
             {
-                Data = appUsersList
+                Data = appUsersList,
+                CurrentAppUserId = currentAppUserId,    
             });
         }
 
@@ -74,15 +84,15 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("Show");
         }
 
-        [Authorize]
+       /* [Authorize]
         [Route("/AppUser/Update/{id}")]
         [HttpGet]
         public IActionResult Update()
         {
             return View();
-        }
+        }*/
 
-        [Authorize]
+        /*[Authorize]
         [Route("/AppUser/Update/{id}")]
         [HttpPost]
         public IActionResult Update(int id, FormModelAppUser model)
@@ -92,11 +102,11 @@ namespace Forum.WebApp.Controllers
                 throw new Exception("Fill in the required fields of the form!");
             }
             var appUser = _appUserService.GetBy(id);
-            model.changeAppUserData(model, appUser);
+            var changedAppUser = model.changeAppUserData(appUser);
             var updatedUser = _appUserService.Update(appUser);
 
             return RedirectToAction("Show");
-        }
+        }*/
 
 
         public class AppUserUpdateFM 

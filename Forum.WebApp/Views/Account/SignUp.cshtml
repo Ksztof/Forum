@@ -16,7 +16,13 @@
     <form asp-action="SignUp" asp-controller="AccountController" method="post">
 
         <label asp-for="SignUp"></label>
-        <input name="UserName" class="form-control" placeholder="Your name" required />
+        <input name="UserName" class="form-control" placeholder="Your display name" required />
+
+        <label asp-for="SignUp"></label>
+        <input name="Name" class="form-control" placeholder="Your name" required />
+
+        <label asp-for="SignUp"></label>
+        <input name="Surname" class="form-control" placeholder="Your surname" required />
         
         <label asp-for="SignUp"></label>
         <input name="Email" class="form-control" placeholder="Email address" type="email" required />

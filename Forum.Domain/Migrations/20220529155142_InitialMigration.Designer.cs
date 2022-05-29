@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Forum.Domain.Migrations
 {
     [DbContext(typeof(ForumDb))]
-    [Migration("20220529133629_initialMigration")]
-    partial class initialMigration
+    [Migration("20220529155142_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

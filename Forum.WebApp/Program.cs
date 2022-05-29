@@ -10,6 +10,7 @@ using Forum.Core.Services.CommentToComment;
 using Forum.Core.Services.Question;
 using Forum.Domain;
 using Forum.Domain.Models.Identities;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,9 @@ builder.Services.AddTransient<ICommentToAnswerService, CommentToAnswerService>()
 builder.Services.AddTransient<ICommentToCommentService, CommentToCommentService>();
 //Identity dodanie kontekstu DB i konfiguracja połaczenia DB z modelami to identity
 builder.Services.AddDbContext<ForumDb>();
-builder.Services.AddIdentity<WebAppUser, WebAppRole>().AddEntityFrameworkStores<ForumDb>();
+builder.Services.AddIdentity<WebAppUser, WebAppRole>()
+    .AddEntityFrameworkStores<ForumDb>()
+    .AddDefaultTokenProviders();        //generate password reset token (email change etc.)
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = /*ściezka do logowania*/"/Account";

@@ -16,7 +16,6 @@ namespace Forum.Core.Models.AppUserModels
         public string Password { get; set; }
         [Required]
         public string DisplayName { get; set; }
-        // public int AppUserId { get; set; }
 
 
         public AppUser Construct()
@@ -33,12 +32,16 @@ namespace Forum.Core.Models.AppUserModels
             };
         }
 
-        public void changeAppUserData(FormModelAppUser model, AppUser appUser)
+        public AppUser changeAppUserData(AppUser appUser)
         {
             //nadpisac 
-            appUser.Username = model.Username;
-            appUser.UserProfile.Surname = model.Surname;
-            appUser.UserProfile.DisplayName = model.DisplayName;
+            appUser.Username = this.Username;
+            appUser.UserProfile.Surname = this.Surname;
+            appUser.UserProfile.DisplayName = this.DisplayName;
+            appUser.UserProfile.Name = this.Username;
+
+
+            return appUser;
         }
 
     }
