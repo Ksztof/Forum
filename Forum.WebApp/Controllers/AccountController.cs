@@ -124,8 +124,19 @@ namespace Forum.WebApp.Controllers
         [Authorize]
         [Route("/AppUser/Update/{id}")]
         [HttpGet]
-        public IActionResult Update()
+        public IActionResult Update(int id)
         {
+            var applicationUser = _usrManager.GetUserAsync(User).Result;
+            var currentAppUserId = applicationUser.UserId;
+            var userIdFromProfile = _appUserService.GetBy(id).Id;
+            if (userIdFromProfile != currentAppUserId)
+            {
+                var errorContent = "What are you doing here?";
+                return RedirectToAction("ShowError", "Account", new ErrorFM
+                {
+                    ErrorContent = errorContent
+                });
+            }
             return View();
         }
 
@@ -160,6 +171,17 @@ namespace Forum.WebApp.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
+            var applicationUser = _usrManager.GetUserAsync(User).Result;
+            var currentAppUserId = applicationUser.UserId;
+            var userIdFromProfile = _appUserService.GetBy(id).Id;
+            if (userIdFromProfile != currentAppUserId)
+            {
+                var errorContent = "What are you doing here?";
+                return RedirectToAction("ShowError", "Account", new ErrorFM
+                {
+                    ErrorContent = errorContent
+                });
+            }
             var webAppUser = _usrManager.Users.Where(u => u.UserId == id).First();
             var result = _usrManager.DeleteAsync(webAppUser).Result;
             var appUserForDelete = _appUserService.GetBy(id);
