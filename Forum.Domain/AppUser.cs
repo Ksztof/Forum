@@ -18,6 +18,10 @@ namespace Forum.Domain
         public bool IsConfirmed { get; set; }
         public IEnumerable<Question>? Questions { get; set; }
         public IEnumerable<Answer>? Answers { get; set; }
+        public IEnumerable<CommentToAnswer>? CommentsToAnswer { get; set; }
+        public IEnumerable<CommentToComment>? CommentsToComment { get; set; }
+
+
         public UserProfile? UserProfile { get; set; }    
     }
 }

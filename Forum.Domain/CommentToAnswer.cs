@@ -21,6 +21,9 @@ namespace Forum.Domain
         public int QuestionId { get; set; } //
         public Question Question { get; set; }
 
+        public int AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
+
         public IEnumerable<CommentToComment> Comments { get; set; }
 
     }

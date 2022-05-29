@@ -81,6 +81,16 @@ namespace Forum.Domain
              .WithMany(q => q.CommentsToAnswer)
              .HasForeignKey(cta => cta.QuestionId);
 
+            modelBuilder.Entity<CommentToAnswer>()
+                .HasOne<AppUser>(cta => cta.AppUser)
+                .WithMany(a => a.CommentsToAnswer)
+                .HasForeignKey(cta => cta.AppUserId);
+
+            modelBuilder.Entity<CommentToComment>()
+                .HasOne<AppUser>(ctc => ctc.AppUser)
+                .WithMany(a => a.CommentsToComment)
+                .HasForeignKey(ctc => ctc.AppUserId);
+
             this.SeedBaseData(modelBuilder); // wstrzykuje dane 
 
 

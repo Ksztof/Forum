@@ -16,5 +16,7 @@ namespace Forum.Domain
         public int CommentToCommentVoteDown { get; set; }
         public int CommentToAnswerId { get; set; }
         public CommentToAnswer CommentToAnswer { get; set; }
+        public int AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }
