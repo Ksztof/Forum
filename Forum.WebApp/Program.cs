@@ -1,8 +1,10 @@
-﻿using Forum.Core.Interfaces.Answer;
+﻿using Forum.Core.Interfaces.Account;
+using Forum.Core.Interfaces.Answer;
 using Forum.Core.Interfaces.AppUsers;
 using Forum.Core.Interfaces.CommentToAnswer;
 using Forum.Core.Interfaces.CommentToComment;
 using Forum.Core.Interfaces.Question;
+using Forum.Core.Services.Account;
 using Forum.Core.Services.Answer;
 using Forum.Core.Services.AppUser;
 using Forum.Core.Services.CommentToAnswer;
@@ -23,6 +25,9 @@ builder.Services.AddTransient<IAnswerService, AnswerService>();
 builder.Services.AddTransient<IQuestionService, QuestionService>();
 builder.Services.AddTransient<ICommentToAnswerService, CommentToAnswerService>();
 builder.Services.AddTransient<ICommentToCommentService, CommentToCommentService>();
+builder.Services.AddTransient<IAccountService, AccountService>();
+
+
 //Identity dodanie kontekstu DB i konfiguracja połaczenia DB z modelami to identity
 builder.Services.AddDbContext<ForumDb>();
 builder.Services.AddIdentity<WebAppUser, WebAppRole>()

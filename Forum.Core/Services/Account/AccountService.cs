@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Forum.Core.Services.Account
 {
-    public class AccountService /*: IAccountService*/
+    public class AccountService : IAccountService
     {
         private UserManager<WebAppUser> _usrManger;
         public AccountService(UserManager<WebAppUser> usrManger)
