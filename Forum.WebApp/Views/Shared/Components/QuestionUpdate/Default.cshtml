@@ -1,0 +1,20 @@
+﻿@using Forum.Core.Models.Question
+@model QuestionAddFM
+
+<div class="form-group">
+    <form asp-action="Add" asp-controller="QuestionController" method="post">
+        <label asp-for="Title"></label>
+        <textarea name="Title" class="form-control" rows="1" placeholder="Title of question" required></textarea>
+
+        <label asp-for="QuestionContent"></label>
+        <textarea name="QuestionContent" class="form-control" rows="25" placeholder="what do you want to ask about?" required></textarea>
+
+        <label asp-for="AppUserId"></label>
+        <input name="AppUserId" placeholder="AppUserId" value="1" type="hidden" required />
+
+        <input type="submit" />
+    </form>
+</div>
+
+
+

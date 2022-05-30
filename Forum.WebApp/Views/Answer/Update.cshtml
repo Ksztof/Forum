@@ -1,7 +1,6 @@
 ﻿@using Forum.Core.Models.Answer
 @{
     ViewData["Title"] = "Update answer";
-    @model AnswerUpdateFM
     Layout = "~/Views/Shared/Layouts/__Main.cshtml";
     <link href="~/css/UpdateAnswer.css" rel="stylesheet">
 }
@@ -13,12 +12,4 @@
     </h2>
 </div>
 
-<div class="form-group">
-    <form asp-action="Add" asp-controller="AnswerController" method="post">
-        <label asp-for="AnswerContent"></label>
-        <textarea name="AnswerContent" class="form-control" rows="25" placeholder="update your asnwer" required></textarea>
-        <input type="submit" />
-    </form>
-</div>
-
-
+@await Component.InvokeAsync("AnswerUpdate", new {AnswerUpdateFM = Model})

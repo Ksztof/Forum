@@ -1,0 +1,20 @@
+﻿@using Forum.Core.Models.AppUserModels
+@model FormModelAppUser
+<div class="form-group">
+    <form asp-action="Update" asp-controller="AccountController" method="post">
+        <label asp-for="Username"></label>
+        <input name="Username" class="form-control" placeholder="User name" required />
+
+        <label asp-for="Surname"></label>
+        <input name="Surname" class="form-control" placeholder="User surname" required />
+
+        <label asp-for="DisplayName"></label>
+        <input name="DisplayName" class="form-control" placeholder="Display name" required />
+
+        <label asp-for="Password"></label>
+        <input name="Password" class="form-control" placeholder="User password" type="password" required />
+
+        <input type="submit" />
+
+    </form>
+</div>

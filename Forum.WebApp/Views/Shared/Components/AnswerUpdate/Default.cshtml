@@ -1,0 +1,12 @@
+﻿@using Forum.Core.Models.Answer
+@model AnswerUpdateFM
+
+<div class="form-group">
+    <form asp-action="Add" asp-controller="AnswerController" method="post">
+        <label asp-for="AnswerContent"></label>
+        <textarea name="AnswerContent" class="form-control" rows="25" placeholder="update your asnwer" required></textarea>
+        <input type="submit" />
+    </form>
+</div>
+
+

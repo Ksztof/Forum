@@ -8,10 +8,6 @@ namespace Forum.WebApp.Models.Components
         {
             return View();
         }
-
-        /*public async Task<IViewComponentResult> InvokeAsync(string formModel)
-        {
-            return View();
-        }*/
     }
+
 }
