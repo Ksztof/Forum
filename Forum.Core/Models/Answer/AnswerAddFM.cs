@@ -1,6 +1,5 @@
-﻿using Forum.Domain;
-using System.ComponentModel.DataAnnotations;
-using AnswerC = Forum.Domain.Answer;
+﻿using System.ComponentModel.DataAnnotations;
+using AnswerC = Forum.Domain.Models.Answer;
 namespace Forum.Core.Models.Answer
 {
     public class AnswerAddFM

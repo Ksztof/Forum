@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Forum.Domain
+namespace Forum.Domain.Models
 {
     public class ForumDb : IdentityDbContext
         <
@@ -45,53 +45,53 @@ namespace Forum.Domain
 
 
             modelBuilder.Entity<Question>()
-                .HasOne<AppUser>(q => q.AppUser)
+                .HasOne(q => q.AppUser)
                 .WithMany(a => a.Questions)
                 .HasForeignKey(q => q.AppUserId);
 
             modelBuilder.Entity<Answer>()
-                .HasOne<AppUser>(an => an.AppUser)
+                .HasOne(an => an.AppUser)
                 .WithMany(a => a.Answers)
                 .HasForeignKey(an => an.AppUserId);
 
             modelBuilder.Entity<Answer>()
-                .HasOne<Question>(an => an.Question)
+                .HasOne(an => an.Question)
                 .WithMany(q => q.Answers)
                 .HasForeignKey(an => an.QuestionId);
 
             modelBuilder.Entity<CommentToAnswer>()
-                .HasOne<Answer>(an => an.Answer)
+                .HasOne(an => an.Answer)
                 .WithMany(cta => cta.CommentsToAnswer)
                 .HasForeignKey(an => an.AnswerId);
 
             modelBuilder.Entity<CommentToComment>()
-                .HasOne<CommentToAnswer>(an => an.CommentToAnswer)
+                .HasOne(an => an.CommentToAnswer)
                 .WithMany(cta => cta.Comments)
                 .HasForeignKey(an => an.CommentToAnswerId);
 
             modelBuilder.Entity<AppUser>()
-                .HasOne<UserProfile>(a => a.UserProfile)
+                .HasOne(a => a.UserProfile)
                 .WithOne(up => up.AppUser)
                 .HasForeignKey<UserProfile>(up => up.AppUserId);
 
             modelBuilder.Entity<QuestionTag>().HasKey(qt => new { qt.QuestionId, qt.TagId });
 
             modelBuilder.Entity<CommentToAnswer>()
-             .HasOne<Question>(cta => cta.Question)
+             .HasOne(cta => cta.Question)
              .WithMany(q => q.CommentsToAnswer)
              .HasForeignKey(cta => cta.QuestionId);
 
             modelBuilder.Entity<CommentToAnswer>()
-                .HasOne<AppUser>(cta => cta.AppUser)
+                .HasOne(cta => cta.AppUser)
                 .WithMany(a => a.CommentsToAnswer)
                 .HasForeignKey(cta => cta.AppUserId);
 
             modelBuilder.Entity<CommentToComment>()
-                .HasOne<AppUser>(ctc => ctc.AppUser)
+                .HasOne(ctc => ctc.AppUser)
                 .WithMany(a => a.CommentsToComment)
                 .HasForeignKey(ctc => ctc.AppUserId);
 
-            this.SeedBaseData(modelBuilder); // wstrzykuje dane 
+            SeedBaseData(modelBuilder); // wstrzykuje dane 
 
 
         }

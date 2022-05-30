@@ -1,4 +1,4 @@
-﻿using Forum.Domain;
+﻿using Forum.Domain.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Forum.WebApp.Models.Account

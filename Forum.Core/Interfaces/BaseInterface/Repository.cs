@@ -1,4 +1,4 @@
-﻿using Forum.Domain;
+﻿using Forum.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

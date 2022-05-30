@@ -1,6 +1,6 @@
 ﻿using Forum.Core.Interfaces.BaseInterface;
 using Forum.Core.Interfaces.CommentToAnswer;
-using Forum.Domain;
+using Forum.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace Forum.Core.Repositories.CommentToAnswer
 {
     public class CommentToAnswerRepository : Repository, ICommentToAnswerRepository
     {
-        public Domain.CommentToAnswer Add(Domain.CommentToAnswer entity)
+        public Domain.Models.CommentToAnswer Add(Domain.Models.CommentToAnswer entity)
         {
             using (ForumDb db = new ForumDb())
             {
@@ -21,7 +21,7 @@ namespace Forum.Core.Repositories.CommentToAnswer
             }
         }
 
-        public bool Delete(Domain.CommentToAnswer entity)
+        public bool Delete(Domain.Models.CommentToAnswer entity)
         {
             using (ForumDb db = new ForumDb())
             {
@@ -36,7 +36,7 @@ namespace Forum.Core.Repositories.CommentToAnswer
             }
         }
 
-        public Domain.CommentToAnswer GetBy(int id)
+        public Domain.Models.CommentToAnswer GetBy(int id)
         {
             using (ForumDb db = new ForumDb())
             {
@@ -45,7 +45,7 @@ namespace Forum.Core.Repositories.CommentToAnswer
             }
         }
 
-        public IEnumerable<Domain.CommentToAnswer> GetList()
+        public IEnumerable<Domain.Models.CommentToAnswer> GetList()
         {
             using (ForumDb db = new ForumDb())
             {
@@ -54,7 +54,7 @@ namespace Forum.Core.Repositories.CommentToAnswer
             }
         }
 
-        public IList<Domain.CommentToAnswer> GetListWithSpecificAnswerId(int answerId)
+        public IList<Domain.Models.CommentToAnswer> GetListWithSpecificAnswerId(int answerId)
         {
             using (ForumDb db = new ForumDb())
             {
@@ -63,7 +63,7 @@ namespace Forum.Core.Repositories.CommentToAnswer
             }
         }
 
-        public Domain.CommentToAnswer Update(Domain.CommentToAnswer entity)
+        public Domain.Models.CommentToAnswer Update(Domain.Models.CommentToAnswer entity)
         {
             using (ForumDb db = new ForumDb())
             {

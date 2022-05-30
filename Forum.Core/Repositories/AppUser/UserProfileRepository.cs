@@ -1,6 +1,6 @@
 ﻿using Forum.Core.Interfaces.AppUsers;
 using Forum.Core.Interfaces.BaseInterface;
-using Forum.Domain;
+using Forum.Domain.Models;
 
 namespace Forum.Core.Repositories.AppUser
 {

@@ -24,32 +24,32 @@ namespace Forum.Core.Services.CommentToComment
         }
 
 
-        public Domain.CommentToComment Add(Domain.CommentToComment entity)
+        public Domain.Models.CommentToComment Add(Domain.Models.CommentToComment entity)
         {
             return CommentToCommentRepository.Add(entity);
         }
 
-        public bool Delete(Domain.CommentToComment entity)
+        public bool Delete(Domain.Models.CommentToComment entity)
         {
             return CommentToCommentRepository.Delete(entity);
         }
 
-        public Domain.CommentToComment GetBy(int id)
+        public Domain.Models.CommentToComment GetBy(int id)
         {
             return CommentToCommentRepository.GetBy(id);
         }
 
-        public IEnumerable<Domain.CommentToComment> GetList()
+        public IEnumerable<Domain.Models.CommentToComment> GetList()
         {
             return CommentToCommentRepository.GetList();
         }
 
-        public IList<Domain.CommentToComment> GetListWithSpecificAnswerId(int answerId)
+        public IList<Domain.Models.CommentToComment> GetListWithSpecificAnswerId(int answerId)
         {
             return CommentToCommentRepository.GetListWithSpecificAnswerId(answerId);
         }
 
-        public Domain.CommentToComment Update(Domain.CommentToComment entity)
+        public Domain.Models.CommentToComment Update(Domain.Models.CommentToComment entity)
         {
             return CommentToCommentRepository.Update(entity);
         }

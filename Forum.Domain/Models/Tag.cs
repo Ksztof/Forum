@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Forum.Domain
+namespace Forum.Domain.Models
 {
     public class Tag
     {
         [Key]
-        public int Id { get; set; } 
+        public int Id { get; set; }
         public string TagName { get; set; }
 
         public IEnumerable<QuestionTag> QuestionTags { get; set; }

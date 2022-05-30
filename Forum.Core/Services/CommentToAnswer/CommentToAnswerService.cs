@@ -1,13 +1,12 @@
 ﻿using Forum.Core.Interfaces.BaseInterface;
 using Forum.Core.Interfaces.CommentToAnswer;
 using Forum.Core.Repositories.CommentToAnswer;
-using Forum.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CommentToAnswerClass = Forum.Domain.CommentToAnswer;
+using CommentToAnswerClass = Forum.Domain.Models.CommentToAnswer;
 namespace Forum.Core.Services.CommentToAnswer
 {
     public class CommentToAnswerService : ICommentToAnswerService

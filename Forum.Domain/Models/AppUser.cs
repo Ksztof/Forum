@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Forum.Domain
+namespace Forum.Domain.Models
 {
     [Table("AppUser")]     //DODAJEMY ATRYBUTY DAJĄCY NAZWĘ TABELI
     public class AppUser
@@ -20,6 +20,6 @@ namespace Forum.Domain
         public IEnumerable<Answer>? Answers { get; set; }
         public IEnumerable<CommentToAnswer>? CommentsToAnswer { get; set; }
         public IEnumerable<CommentToComment>? CommentsToComment { get; set; }
-        public UserProfile? UserProfile { get; set; }    
+        public UserProfile? UserProfile { get; set; }
     }
 }

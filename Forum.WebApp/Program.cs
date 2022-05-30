@@ -8,7 +8,7 @@ using Forum.Core.Services.AppUser;
 using Forum.Core.Services.CommentToAnswer;
 using Forum.Core.Services.CommentToComment;
 using Forum.Core.Services.Question;
-using Forum.Domain;
+using Forum.Domain.Models;
 using Forum.Domain.Models.Identities;
 using Microsoft.AspNetCore.Identity;
 

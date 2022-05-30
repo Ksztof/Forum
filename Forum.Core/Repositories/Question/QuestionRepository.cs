@@ -1,12 +1,12 @@
 ﻿using Forum.Core.Interfaces.BaseInterface;
 using Forum.Core.Interfaces.Question;
-using Forum.Domain;
+using Forum.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using QuestionC = Forum.Domain.Question;
+using QuestionC = Forum.Domain.Models.Question;
 namespace Forum.Core.Repositories.Question
 {
     public class QuestionRepository : Repository, IQuestionRepository
@@ -52,7 +52,7 @@ namespace Forum.Core.Repositories.Question
 
 
 
-        public Domain.Question Update(Domain.Question entity)
+        public QuestionC Update(QuestionC entity)
         {
             using (ForumDb db = new ForumDb())
             {

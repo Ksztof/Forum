@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using QuestionC = Forum.Domain.Question;
+using QuestionC = Forum.Domain.Models.Question;
 namespace Forum.Core.Models.Question
 {
     public class QuestionAddFM

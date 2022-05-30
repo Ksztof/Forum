@@ -1,13 +1,12 @@
 ﻿using Forum.Core.Interfaces.Answer;
 using Forum.Core.Repositories.Answer;
-using Forum.Domain;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AnswerClass = Forum.Domain.Answer;
+using AnswerClass = Forum.Domain.Models.Answer;
 namespace Forum.Core.Services.Answer
 {
     public class AnswerService : IAnswerService

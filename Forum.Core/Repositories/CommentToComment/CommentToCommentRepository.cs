@@ -1,6 +1,6 @@
 ﻿using Forum.Core.Interfaces.BaseInterface;
 using Forum.Core.Interfaces.CommentToComment;
-using Forum.Domain;
+using Forum.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace Forum.Core.Repositories.CommentToComment
 {
     internal class CommentToCommentRepository : Repository, ICommentToCommentRepository
     {
-        public Domain.CommentToComment Add(Domain.CommentToComment entity)
+        public Domain.Models.CommentToComment Add(Domain.Models.CommentToComment entity)
         {
             using (ForumDb db = new ForumDb())
             {
@@ -21,7 +21,7 @@ namespace Forum.Core.Repositories.CommentToComment
             }
         }
 
-        public bool Delete(Domain.CommentToComment entity)
+        public bool Delete(Domain.Models.CommentToComment entity)
         {
             using (ForumDb db = new ForumDb())
             {
@@ -36,7 +36,7 @@ namespace Forum.Core.Repositories.CommentToComment
             }
         }
 
-        public Domain.CommentToComment GetBy(int id)
+        public Domain.Models.CommentToComment GetBy(int id)
         {
             using (ForumDb db = new ForumDb())
             {
@@ -45,7 +45,7 @@ namespace Forum.Core.Repositories.CommentToComment
             }
         }
 
-        public IEnumerable<Domain.CommentToComment> GetList()
+        public IEnumerable<Domain.Models.CommentToComment> GetList()
         {
             using (ForumDb db = new ForumDb())
             {
@@ -54,7 +54,7 @@ namespace Forum.Core.Repositories.CommentToComment
             }
         }
 
-        public IList<Domain.CommentToComment> GetListWithSpecificAnswerId(int answerId)
+        public IList<Domain.Models.CommentToComment> GetListWithSpecificAnswerId(int answerId)
         {
             using (ForumDb db = new ForumDb())
             {
@@ -63,7 +63,7 @@ namespace Forum.Core.Repositories.CommentToComment
             }
         }
 
-        public Domain.CommentToComment Update(Domain.CommentToComment entity)
+        public Domain.Models.CommentToComment Update(Domain.Models.CommentToComment entity)
         {
             using (ForumDb db = new ForumDb())
             {

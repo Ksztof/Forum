@@ -1,9 +1,8 @@
 ﻿using Forum.Core.Interfaces.AppUsers;
 using Forum.Core.Interfaces.BaseInterface;
 using Forum.Core.Repositories.AppUser;
-using Forum.Domain;
 using System.ComponentModel.DataAnnotations;
-using AppUserClass = Forum.Domain.AppUser;
+using AppUserClass = Forum.Domain.Models.AppUser;
 
 
 namespace Forum.Core.Services.AppUser

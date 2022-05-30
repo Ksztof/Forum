@@ -1,6 +1,6 @@
 ﻿using Forum.Core.Interfaces.Answer;
 using Forum.Core.Interfaces.BaseInterface;
-using Forum.Domain;
+using Forum.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace Forum.Core.Repositories.Answer
 {
     public class AnswerRepository : Repository, IAnswerRepository
     {
-        public Domain.Answer Add(Domain.Answer entity)
+        public Domain.Models.Answer Add(Domain.Models.Answer entity)
         {
             using (ForumDb db = new ForumDb())
             {
@@ -22,7 +22,7 @@ namespace Forum.Core.Repositories.Answer
         }
 
 
-        public bool Delete(Domain.Answer entity)
+        public bool Delete(Domain.Models.Answer entity)
         {
             using (ForumDb db = new ForumDb())
             {
@@ -32,7 +32,7 @@ namespace Forum.Core.Repositories.Answer
             }
         }
 
-        public Domain.Answer GetBy(int id)
+        public Domain.Models.Answer GetBy(int id)
         {
             using (ForumDb db = new ForumDb())
             {
@@ -41,7 +41,7 @@ namespace Forum.Core.Repositories.Answer
             }
         }
 
-        public IEnumerable<Domain.Answer> GetList()
+        public IEnumerable<Domain.Models.Answer> GetList()
         {
             using (ForumDb db = new ForumDb())
             {
@@ -53,7 +53,7 @@ namespace Forum.Core.Repositories.Answer
         }
 
 
-        public Domain.Answer Update(Domain.Answer entity)
+        public Domain.Models.Answer Update(Domain.Models.Answer entity)
         {
             using (ForumDb db = new ForumDb())
             {

@@ -1,6 +1,6 @@
-﻿using Forum.Domain;
+﻿using Forum.Domain.Models;
 using System.ComponentModel.DataAnnotations;
-using extAppUser = Forum.Domain.UserProfile;
+using extAppUser = Forum.Domain.Models.UserProfile;
 namespace Forum.Core.Models.AppUserModels
 {
     public class FormModelAppUser // pozmieniac nazwy

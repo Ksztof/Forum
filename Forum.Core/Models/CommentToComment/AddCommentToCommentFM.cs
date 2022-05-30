@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CommentToCommentC = Forum.Domain.CommentToComment;
+using CommentToCommentC = Forum.Domain.Models.CommentToComment;
 namespace Forum.Core.Models.CommentToComment
 {
     public class AddCommentToCommentFM

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AnswerC = Forum.Domain.Answer;
+using AnswerC = Forum.Domain.Models.Answer;
 namespace Forum.Core.Models.Answer
 {
     public class AnswerUpdateFM

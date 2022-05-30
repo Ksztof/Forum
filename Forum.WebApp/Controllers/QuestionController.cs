@@ -1,7 +1,7 @@
 ﻿using Forum.Core.Interfaces.Question;
 using Forum.Core.Models.AppUserModels;
 using Forum.Core.Models.Question;
-using Forum.Domain;
+using Forum.Domain.Models;
 using Forum.Domain.Models.Error;
 using Forum.Domain.Models.Identities;
 using Microsoft.AspNetCore.Authorization;

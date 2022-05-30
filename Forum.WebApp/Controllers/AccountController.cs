@@ -209,7 +209,7 @@ namespace Forum.WebApp.Controllers
         [HttpGet]
         public IActionResult SignOut()
         {
-            signInManager.SignOutAsync();
+           signInManager.SignOutAsync();
 
             return RedirectToAction("Index");
         }

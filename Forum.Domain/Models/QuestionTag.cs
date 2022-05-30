@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Forum.Domain
+namespace Forum.Domain.Models
 {
     public class QuestionTag
     {
@@ -14,7 +14,7 @@ namespace Forum.Domain
         public int QuestionId { get; set; }
         public virtual Question Question { get; set; }
 
-        public int TagId { get; set; }  
+        public int TagId { get; set; }
         public virtual Tag Tag { get; set; }
 
     }

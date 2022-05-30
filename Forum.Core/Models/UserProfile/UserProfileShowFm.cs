@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UserProfileC = Forum.Domain.UserProfile;
+using UserProfileC = Forum.Domain.Models.UserProfile;
 
 namespace Forum.Core.Models.UserProfile
 {

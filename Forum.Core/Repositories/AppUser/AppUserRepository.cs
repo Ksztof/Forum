@@ -1,6 +1,6 @@
 ﻿using Forum.Core.Interfaces.AppUsers;
 using Forum.Core.Interfaces.BaseInterface;
-using Forum.Domain;
+using Forum.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Forum.Core.Repositories.AppUser
 
     public class AppUserRepository : Repository, IAppUserRepository
     {
-        public Domain.AppUser Add(Domain.AppUser entity)
+        public Domain.Models.AppUser Add(Domain.Models.AppUser entity)
         {
             using (ForumDb db = new ForumDb())
             {
@@ -23,7 +23,7 @@ namespace Forum.Core.Repositories.AppUser
         }
 
 
-        public bool Delete(Domain.AppUser entity)
+        public bool Delete(Domain.Models.AppUser entity)
         {
 
 
@@ -41,7 +41,7 @@ namespace Forum.Core.Repositories.AppUser
         }
 
         //Pozmieniałem to na koniec, dodałem includa
-        public Domain.AppUser GetBy(int id)
+        public Domain.Models.AppUser GetBy(int id)
         {
             using (ForumDb db = new ForumDb())
             {
@@ -50,7 +50,7 @@ namespace Forum.Core.Repositories.AppUser
             }
         }
 
-        public IEnumerable<Domain.AppUser> GetList()
+        public IEnumerable<Domain.Models.AppUser> GetList()
         {
             using (ForumDb db = new ForumDb())
             {
@@ -60,7 +60,7 @@ namespace Forum.Core.Repositories.AppUser
         }
 
 
-        public Domain.AppUser Update(Domain.AppUser entity)
+        public Domain.Models.AppUser Update(Domain.Models.AppUser entity)
         {
             using (ForumDb db = new ForumDb())
             {
