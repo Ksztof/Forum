@@ -1,4 +1,5 @@
-﻿using Forum.Core.Interfaces.AppUsers;
+﻿using Forum.Core.Interfaces.Account;
+using Forum.Core.Interfaces.AppUsers;
 using Forum.Core.Models;
 using Forum.Core.Models.AppUserModels;
 using Forum.Domain;
@@ -14,16 +15,18 @@ namespace Forum.WebApp.Controllers
     public class AccountController : Controller
     {
         private IAppUserService _appUserService;
+        private IAccountService _accountService;
         private UserManager<WebAppUser> _usrManager;
         private SignInManager<WebAppUser> signInManager;
         private RoleManager<WebAppRole> roleManager;
 
-        public AccountController(IAppUserService appUserService, UserManager<WebAppUser> usrManager, SignInManager<WebAppUser> signInManager, RoleManager<WebAppRole> roleManager)
+        public AccountController(IAppUserService appUserService, UserManager<WebAppUser> usrManager, SignInManager<WebAppUser> signInManager, RoleManager<WebAppRole> roleManager, IAccountService accountService)
         {
             _appUserService = appUserService;
             this._usrManager = usrManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
+            this._accountService = accountService;
         }
 
 
@@ -80,7 +83,6 @@ namespace Forum.WebApp.Controllers
                 });
             }
             var appUser = model.ContructAppUser();
-
             var isExist = _appUserService.GetByEmail(model.Email);
             if (isExist != null)
             {
@@ -92,6 +94,7 @@ namespace Forum.WebApp.Controllers
             }
 
             var user = _appUserService.Add(appUser);
+
             if (user == null)
             {
                 var errorContent = "User object is missing data";
