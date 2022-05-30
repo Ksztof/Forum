@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Forum.Domain.Models.Identities
 {
-    public class WebAppUser : IdentityUser
+    public class WebAppUser : IdentityUser//TODO: Przenieść Modele BD do folderu MODEL
     {
         public int UserId { get; set; }
         public virtual AppUser User { get; set; }

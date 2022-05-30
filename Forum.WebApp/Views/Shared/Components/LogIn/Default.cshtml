@@ -1,0 +1,16 @@
+﻿@using Forum.WebApp.Models.Account
+@model LogInModel;
+
+<div class="form-group">
+    <form asp-action="SignIn" asp-controller="AccountController" method="post">
+        <label asp-for="SignIn"></label>
+        <input name="AccountUserLogin" class="form-control" placeholder="type your username" required />
+
+        <label asp-for="SignIn"></label>
+        <input name="AccountUserPassword" class="form-control" placeholder="type your password" type="password" required/>
+
+        <input type="submit" />
+    </form>
+</div>
+
+
