@@ -9,7 +9,6 @@ using Forum.WebApp.Models.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-
 namespace Forum.WebApp.Controllers
 {
     public class AccountController : Controller
@@ -72,7 +71,7 @@ namespace Forum.WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SignUp(RegisterFM model)
+        public IActionResult SignUp(Domain.Models.Account.RegisterFM model)
         {
             if (!ModelState.IsValid || model.Password != model.PasswordConfirm)
             {
@@ -104,11 +103,13 @@ namespace Forum.WebApp.Controllers
                 });
             }
 
-            WebAppUser webAppUser = new WebAppUser();
+           /* WebAppUser webAppUser = new WebAppUser();
             webAppUser.Email = model.Email;
             webAppUser.UserName = model.UserName;
             webAppUser.UserId = user.Id;
-            var createResult = _usrManager.CreateAsync(webAppUser, model.Password).Result;
+            var createResult = _usrManager.CreateAsync(webAppUser, model.Password).Result;*/
+
+            var createResult = _accountService.Add(model, appUser);
 
             if (!createResult.Succeeded)
             {
@@ -153,7 +154,7 @@ namespace Forum.WebApp.Controllers
                 throw new Exception("Fill in the required fields of the form!");
             }
 
-            var appUser = _appUserService.GetBy(id);
+            /*var appUser = _appUserService.GetBy(id);
             var changedAppUserData = model.changeAppUserData(appUser);
             var updatedAppUser = _appUserService.Update(changedAppUserData);
 
@@ -164,7 +165,8 @@ namespace Forum.WebApp.Controllers
             var updateResult = _usrManager.UpdateAsync(webAppUser);
 
             var token = _usrManager.GeneratePasswordResetTokenAsync(webAppUser).Result;
-            var result = _usrManager.ResetPasswordAsync(webAppUser, token, model.Password);
+            var result = _usrManager.ResetPasswordAsync(webAppUser, token, model.Password);*/
+            _accountService.Update(model, id);
 
             return RedirectToAction("Show", "AppUser");
         }
@@ -174,10 +176,12 @@ namespace Forum.WebApp.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var applicationUser = _usrManager.GetUserAsync(User).Result;
+            /*var applicationUser = _usrManager.GetUserAsync(User).Result;
             var currentAppUserId = applicationUser.UserId;
-            var userIdFromProfile = _appUserService.GetBy(id).Id;
-            if (userIdFromProfile != currentAppUserId)
+            var userIdFromProfile = _appUserService.GetBy(id).Id;*/
+            var resultCheck = _accountService.Check(User, id);
+
+            if (resultCheck != true)
             {
                 var errorContent = "What are you doing here?";
                 return RedirectToAction("ShowError", "Account", new ErrorFM
@@ -185,12 +189,13 @@ namespace Forum.WebApp.Controllers
                     ErrorContent = errorContent
                 });
             }
-            var webAppUser = _usrManager.Users.Where(u => u.UserId == id).First();
+            /*var webAppUser = _usrManager.Users.Where(u => u.UserId == id).First();
             var result = _usrManager.DeleteAsync(webAppUser).Result;
             var appUserForDelete = _appUserService.GetBy(id);
-            var deleteAppUser = _appUserService.Delete(appUserForDelete);
+            var deleteAppUser = _appUserService.Delete(appUserForDelete);*/
+            var deleteResult = _accountService.Delete(id);
 
-            if (result == null)
+            if (deleteResult == false)
             {
                 var errorContent = "Delete operation was't successful";
                 return RedirectToAction("ShowError", new ErrorFM

@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace Forum.Core.Interfaces.Account
 {
-    public interface IAccountServiceBase <T> where T : class
+    public interface IAccountServiceBase <A, B, C, D, E, F> where A : class where B : class where D : class where E : class where F : class
     {
-        T Add(T entity, T model);
-        bool Delete(T entity);
-        IEnumerable<T> GetList();
-        T GetBy(int id);
-        T Update(T entity, T model);
+        F Add(A model, B appUser);
+        bool Delete(C entity);
+        void Update(D model, C id);
+        bool Check(E user, C id);
     }
 }
