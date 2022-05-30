@@ -1,0 +1,26 @@
+﻿@using Forum.WebApp.Models.Account
+ @model RegisterFM;
+<div class="form-group">
+    <form asp-action="SignUp" asp-controller="AccountController" method="post">
+
+        <label asp-for="SignUp"></label>
+        <input name="UserName" class="form-control" placeholder="Your display name" required />
+
+        <label asp-for="SignUp"></label>
+        <input name="Name" class="form-control" placeholder="Your name" required />
+
+        <label asp-for="SignUp"></label>
+        <input name="Surname" class="form-control" placeholder="Your surname" required />
+        
+        <label asp-for="SignUp"></label>
+        <input name="Email" class="form-control" placeholder="Email address" type="email" required />
+
+        <label asp-for="SignUp"></label>
+        <input name="Password" class="form-control" placeholder="Your password"  type="password" required />
+
+        <label asp-for="SignUp"></label>
+        <input name="PasswordConfirm" class="form-control" placeholder="Confirm your password" type="password" required />
+        
+        <input type="submit" />
+    </form>
+</div>

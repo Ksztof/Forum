@@ -1,7 +1,6 @@
 ﻿@using Forum.Core.Models.CommentToComment
 @{
     ViewData["Title"] = "Add new comment to comment";
-    @model AddCommentToCommentFM
     Layout = "~/Views/Shared/Layouts/__Main.cshtml";
     <link href="~/css/AddCommentToComment.css" rel="stylesheet">
 }
@@ -11,12 +10,4 @@
         Add comment to comment
     </h2>
 </div>
-<div>
-    <form asp-action="Add" class="form-group" asp-controller="CommentToCommentController" method="post">
-        <label asp-for="CommentToCommentContent"></label>
-        <textarea name="CommentToCommentContent" class="form-control" rows="25" placeholder="Write your comment" required></textarea>
-        <input type="submit" />
-    </form>
-</div>
-
-
+@await Component.InvokeAsync("CommentToCommentAdd", new {AddCommentToCommentFM = Model})

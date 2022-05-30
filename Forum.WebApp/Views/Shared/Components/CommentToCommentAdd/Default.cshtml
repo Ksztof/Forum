@@ -1,0 +1,13 @@
+﻿@using Forum.Core.Models.CommentToComment
+@model AddCommentToCommentFM
+
+<div>
+    <form asp-action="Add" class="form-group" asp-controller="CommentToCommentController" method="post">
+        <label asp-for="CommentToCommentContent"></label>
+        <textarea name="CommentToCommentContent" class="form-control" rows="25" placeholder="Write your comment" required></textarea>
+        <input type="submit" />
+    </form>
+</div>
+
+
+
