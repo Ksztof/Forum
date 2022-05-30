@@ -1,7 +1,6 @@
 ﻿@using Forum.Core.Models.UserProfile
 @{
     ViewData["Title"] = "Show app user extended information";
-    @model UserProfileShowFm
     Layout = "~/Views/Shared/Layouts/__Main.cshtml";
     <link href="~/css/ShowUserDetail.css" rel="stylesheet">
 }
@@ -12,22 +11,5 @@
     </h2>
 </div>
 
-<div>
-    @{
-        <table class="table table-striped">
-            <tr>
-                <th>AppUserId</th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>DisplayName</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>@Model.AppUserId</td>
-                <td>@Model.Name</td>
-                <td>@Model.Surname</td>
-                <td>@Model.DisplayName</td>
-            </tr>
-        </table>
-    }
-</div>
+
+@await Component.InvokeAsync("UserDataShow")

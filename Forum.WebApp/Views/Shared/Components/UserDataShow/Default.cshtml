@@ -1,0 +1,22 @@
+﻿@using Forum.Core.Models.UserProfile
+@model UserProfileShowFm
+
+<div>
+    @{
+        <table class="table table-striped">
+            <tr>
+                <th>AppUserId</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>DisplayName</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>@Model.AppUserId</td>
+                <td>@Model.Name</td>
+                <td>@Model.Surname</td>
+                <td>@Model.DisplayName</td>
+            </tr>
+        </table>
+    }
+</div>

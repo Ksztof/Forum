@@ -53,7 +53,6 @@ namespace Forum.WebApp.Controllers
             AppUser appUser = model.Construct();
             appUser = _appUserService.Add(appUser);
 
-
             return RedirectToAction("Index");
         }
 
