@@ -1,7 +1,6 @@
 ﻿@using Forum.Core.Models.Question
 @{
     ViewData["Title"] = "Add new user";
-    @model QuestionAddFM
     Layout = "~/Views/Shared/Layouts/__Main.cshtml";
     <link href="~/css/AddQuestion.css" rel="stylesheet">
 }
@@ -12,16 +11,4 @@
     </h2>
 </div>
 
-<div class="form-group">
-    <form asp-action="Add" asp-controller="QuestionController" method="post">
-        <label asp-for="Title"></label>
-        <input name="Title" class="form-control" placeholder="Title of question" required />
-
-        <label asp-for="QuestionContent"></label>
-        <textarea class="form-control" rows="25" name="QuestionContent" placeholder="Type your question" required ></textarea>
-
-        <input type="submit" />
-    </form>
-</div>
-
-
+@await Component.InvokeAsync("QuestionAdd", new {QuestionAddFM = Model})
