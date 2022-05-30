@@ -12,13 +12,15 @@ namespace Forum.Core.Services.Account
     public class AccountService : IAccountService
     {
         private UserManager<WebAppUser> _usrManger;
+
         public AccountService(UserManager<WebAppUser> usrManger)
         {
             this._usrManger = usrManger;
         }
 
 
-        public WebAppUser Add(WebAppUser entity)
+
+        public WebAppUser Add(WebAppUser entity, WebAppUser model)
         {
             throw new NotImplementedException();
         }
@@ -38,7 +40,7 @@ namespace Forum.Core.Services.Account
             throw new NotImplementedException();
         }
 
-        public WebAppUser Update(WebAppUser entity)
+        public WebAppUser Update(WebAppUser entity, WebAppUser model)
         {
             throw new NotImplementedException();
         }
