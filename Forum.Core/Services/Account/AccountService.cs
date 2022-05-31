@@ -34,6 +34,7 @@ namespace Forum.Core.Services.Account
             return createResult;
         }
 
+
         public bool Delete(int id)
         {
             var webAppUser = _usrManager.Users.Where(u => u.UserId == id).First();
@@ -58,7 +59,7 @@ namespace Forum.Core.Services.Account
             }
             return false;
         }
-
+        //TODO: prevent default JS 
 
         public void Update(FormModelAppUser model, int id)
         {
