@@ -109,6 +109,22 @@ namespace Forum.Domain.Models
                     .IsRequired();
             });
 
+            modelBuilder.Entity<WebAppUser>(b =>
+            {
+                b.HasMany(e => e.Claims)
+                    .WithOne(e => e.User)
+                    .HasForeignKey(ur => ur.UserId)
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity<WebAppRole>(b =>
+            {
+                b.HasMany(e => e.RoleClaims)
+                    .WithOne(e => e.Role)
+                    .HasForeignKey(ur => ur.RoleId)
+                    .IsRequired();
+            });
+
 
             SeedBaseData(modelBuilder); 
 

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Forum.Domain.Migrations
 {
     [DbContext(typeof(ForumDb))]
-    [Migration("20220608190759_fixedIdentTables2")]
+    [Migration("20220608192856_fixedIdentTables2")]
     partial class fixedIdentTables2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -179,8 +179,8 @@ namespace Forum.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d8bf006d-3dea-488d-b9fa-01dfc8a399ae",
-                            ConcurrencyStamp = "6b521f2f-3f33-4807-8173-0e3e511b1e17",
+                            Id = "f1d2ea80-790d-49e9-98ff-a8453282d998",
+                            ConcurrencyStamp = "f7113840-2baa-4922-80d5-9eca8b530d2d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -204,15 +204,9 @@ namespace Forum.Domain.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("RoleId1")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("RoleId1");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
@@ -304,15 +298,9 @@ namespace Forum.Domain.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId1")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
@@ -546,15 +534,9 @@ namespace Forum.Domain.Migrations
 
             modelBuilder.Entity("Forum.Domain.Models.Identities.WebAppRoleClaim", b =>
                 {
-                    b.HasOne("Forum.Domain.Models.Identities.WebAppRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Forum.Domain.Models.Identities.WebAppRole", "Role")
                         .WithMany("RoleClaims")
-                        .HasForeignKey("RoleId1")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -574,15 +556,9 @@ namespace Forum.Domain.Migrations
 
             modelBuilder.Entity("Forum.Domain.Models.Identities.WebAppUserClaims", b =>
                 {
-                    b.HasOne("Forum.Domain.Models.Identities.WebAppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Forum.Domain.Models.Identities.WebAppUser", "User")
                         .WithMany("Claims")
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

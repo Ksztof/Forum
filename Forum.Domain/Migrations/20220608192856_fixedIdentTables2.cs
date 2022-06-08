@@ -135,7 +135,6 @@ namespace Forum.Domain.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    RoleId1 = table.Column<string>(type: "text", nullable: false),
                     RoleId = table.Column<string>(type: "text", nullable: false),
                     ClaimType = table.Column<string>(type: "text", nullable: true),
                     ClaimValue = table.Column<string>(type: "text", nullable: true)
@@ -149,12 +148,6 @@ namespace Forum.Domain.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId1",
-                        column: x => x.RoleId1,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -163,7 +156,6 @@ namespace Forum.Domain.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId1 = table.Column<string>(type: "text", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: false),
                     ClaimType = table.Column<string>(type: "text", nullable: true),
                     ClaimValue = table.Column<string>(type: "text", nullable: true)
@@ -174,12 +166,6 @@ namespace Forum.Domain.Migrations
                     table.ForeignKey(
                         name: "FK_AspNetUserClaims_AspNetUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -384,7 +370,7 @@ namespace Forum.Domain.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "d8bf006d-3dea-488d-b9fa-01dfc8a399ae", "6b521f2f-3f33-4807-8173-0e3e511b1e17", "Admin", "ADMIN" });
+                values: new object[] { "f1d2ea80-790d-49e9-98ff-a8453282d998", "f7113840-2baa-4922-80d5-9eca8b530d2d", "Admin", "ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Answers_AppUserId",
@@ -402,11 +388,6 @@ namespace Forum.Domain.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetRoleClaims_RoleId1",
-                table: "AspNetRoleClaims",
-                column: "RoleId1");
-
-            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
@@ -416,11 +397,6 @@ namespace Forum.Domain.Migrations
                 name: "IX_AspNetUserClaims_UserId",
                 table: "AspNetUserClaims",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserClaims_UserId1",
-                table: "AspNetUserClaims",
-                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserLogins_UserId",
