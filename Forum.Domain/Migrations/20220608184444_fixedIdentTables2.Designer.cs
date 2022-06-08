@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Forum.Domain.Migrations
 {
     [DbContext(typeof(ForumDb))]
-    [Migration("20220529184137_migr")]
-    partial class migr
+    [Migration("20220608184444_fixedIdentTables2")]
+    partial class fixedIdentTables2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace Forum.Domain.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Forum.Domain.Answer", b =>
+            modelBuilder.Entity("Forum.Domain.Models.Answer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,7 +57,7 @@ namespace Forum.Domain.Migrations
                     b.ToTable("Answers");
                 });
 
-            modelBuilder.Entity("Forum.Domain.AppUser", b =>
+            modelBuilder.Entity("Forum.Domain.Models.AppUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -80,7 +80,7 @@ namespace Forum.Domain.Migrations
                     b.ToTable("AppUser");
                 });
 
-            modelBuilder.Entity("Forum.Domain.CommentToAnswer", b =>
+            modelBuilder.Entity("Forum.Domain.Models.CommentToAnswer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -118,7 +118,7 @@ namespace Forum.Domain.Migrations
                     b.ToTable("CommentsToAnswer");
                 });
 
-            modelBuilder.Entity("Forum.Domain.CommentToComment", b =>
+            modelBuilder.Entity("Forum.Domain.Models.CommentToComment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -175,6 +175,15 @@ namespace Forum.Domain.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "6e4f82f3-9bf7-4cfb-82f4-1327494fc3d5",
+                            ConcurrencyStamp = "935f90aa-d116-40ae-a7cf-014d2ac781a7",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Forum.Domain.Models.Identities.WebAppRoleClaim", b =>
@@ -349,7 +358,6 @@ namespace Forum.Domain.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("UserId1")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("UserId", "RoleId");
@@ -388,7 +396,7 @@ namespace Forum.Domain.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Forum.Domain.Question", b =>
+            modelBuilder.Entity("Forum.Domain.Models.Question", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -420,7 +428,7 @@ namespace Forum.Domain.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("Forum.Domain.QuestionTag", b =>
+            modelBuilder.Entity("Forum.Domain.Models.QuestionTag", b =>
                 {
                     b.Property<int>("QuestionId")
                         .HasColumnType("integer");
@@ -435,7 +443,7 @@ namespace Forum.Domain.Migrations
                     b.ToTable("QuestionTags");
                 });
 
-            modelBuilder.Entity("Forum.Domain.Tag", b =>
+            modelBuilder.Entity("Forum.Domain.Models.Tag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -452,7 +460,7 @@ namespace Forum.Domain.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("Forum.Domain.UserProfile", b =>
+            modelBuilder.Entity("Forum.Domain.Models.UserProfile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -482,15 +490,15 @@ namespace Forum.Domain.Migrations
                     b.ToTable("UserProfiles");
                 });
 
-            modelBuilder.Entity("Forum.Domain.Answer", b =>
+            modelBuilder.Entity("Forum.Domain.Models.Answer", b =>
                 {
-                    b.HasOne("Forum.Domain.AppUser", "AppUser")
+                    b.HasOne("Forum.Domain.Models.AppUser", "AppUser")
                         .WithMany("Answers")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Forum.Domain.Question", "Question")
+                    b.HasOne("Forum.Domain.Models.Question", "Question")
                         .WithMany("Answers")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -501,21 +509,21 @@ namespace Forum.Domain.Migrations
                     b.Navigation("Question");
                 });
 
-            modelBuilder.Entity("Forum.Domain.CommentToAnswer", b =>
+            modelBuilder.Entity("Forum.Domain.Models.CommentToAnswer", b =>
                 {
-                    b.HasOne("Forum.Domain.Answer", "Answer")
+                    b.HasOne("Forum.Domain.Models.Answer", "Answer")
                         .WithMany("CommentsToAnswer")
                         .HasForeignKey("AnswerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Forum.Domain.AppUser", "AppUser")
+                    b.HasOne("Forum.Domain.Models.AppUser", "AppUser")
                         .WithMany("CommentsToAnswer")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Forum.Domain.Question", "Question")
+                    b.HasOne("Forum.Domain.Models.Question", "Question")
                         .WithMany("CommentsToAnswer")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -528,15 +536,15 @@ namespace Forum.Domain.Migrations
                     b.Navigation("Question");
                 });
 
-            modelBuilder.Entity("Forum.Domain.CommentToComment", b =>
+            modelBuilder.Entity("Forum.Domain.Models.CommentToComment", b =>
                 {
-                    b.HasOne("Forum.Domain.AppUser", "AppUser")
+                    b.HasOne("Forum.Domain.Models.AppUser", "AppUser")
                         .WithMany("CommentsToComment")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Forum.Domain.CommentToAnswer", "CommentToAnswer")
+                    b.HasOne("Forum.Domain.Models.CommentToAnswer", "CommentToAnswer")
                         .WithMany("Comments")
                         .HasForeignKey("CommentToAnswerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -566,7 +574,7 @@ namespace Forum.Domain.Migrations
 
             modelBuilder.Entity("Forum.Domain.Models.Identities.WebAppUser", b =>
                 {
-                    b.HasOne("Forum.Domain.AppUser", "User")
+                    b.HasOne("Forum.Domain.Models.AppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -631,9 +639,7 @@ namespace Forum.Domain.Migrations
 
                     b.HasOne("Forum.Domain.Models.Identities.WebAppUser", "User")
                         .WithMany("UserRoles")
-                        .HasForeignKey("UserId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Role");
 
@@ -657,9 +663,9 @@ namespace Forum.Domain.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Forum.Domain.Question", b =>
+            modelBuilder.Entity("Forum.Domain.Models.Question", b =>
                 {
-                    b.HasOne("Forum.Domain.AppUser", "AppUser")
+                    b.HasOne("Forum.Domain.Models.AppUser", "AppUser")
                         .WithMany("Questions")
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -668,15 +674,15 @@ namespace Forum.Domain.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("Forum.Domain.QuestionTag", b =>
+            modelBuilder.Entity("Forum.Domain.Models.QuestionTag", b =>
                 {
-                    b.HasOne("Forum.Domain.Question", "Question")
+                    b.HasOne("Forum.Domain.Models.Question", "Question")
                         .WithMany("QuestionTags")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Forum.Domain.Tag", "Tag")
+                    b.HasOne("Forum.Domain.Models.Tag", "Tag")
                         .WithMany("QuestionTags")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -687,23 +693,23 @@ namespace Forum.Domain.Migrations
                     b.Navigation("Tag");
                 });
 
-            modelBuilder.Entity("Forum.Domain.UserProfile", b =>
+            modelBuilder.Entity("Forum.Domain.Models.UserProfile", b =>
                 {
-                    b.HasOne("Forum.Domain.AppUser", "AppUser")
+                    b.HasOne("Forum.Domain.Models.AppUser", "AppUser")
                         .WithOne("UserProfile")
-                        .HasForeignKey("Forum.Domain.UserProfile", "AppUserId")
+                        .HasForeignKey("Forum.Domain.Models.UserProfile", "AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("Forum.Domain.Answer", b =>
+            modelBuilder.Entity("Forum.Domain.Models.Answer", b =>
                 {
                     b.Navigation("CommentsToAnswer");
                 });
 
-            modelBuilder.Entity("Forum.Domain.AppUser", b =>
+            modelBuilder.Entity("Forum.Domain.Models.AppUser", b =>
                 {
                     b.Navigation("Answers");
 
@@ -716,7 +722,7 @@ namespace Forum.Domain.Migrations
                     b.Navigation("UserProfile");
                 });
 
-            modelBuilder.Entity("Forum.Domain.CommentToAnswer", b =>
+            modelBuilder.Entity("Forum.Domain.Models.CommentToAnswer", b =>
                 {
                     b.Navigation("Comments");
                 });
@@ -739,7 +745,7 @@ namespace Forum.Domain.Migrations
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("Forum.Domain.Question", b =>
+            modelBuilder.Entity("Forum.Domain.Models.Question", b =>
                 {
                     b.Navigation("Answers");
 
@@ -748,7 +754,7 @@ namespace Forum.Domain.Migrations
                     b.Navigation("QuestionTags");
                 });
 
-            modelBuilder.Entity("Forum.Domain.Tag", b =>
+            modelBuilder.Entity("Forum.Domain.Models.Tag", b =>
                 {
                     b.Navigation("QuestionTags");
                 });

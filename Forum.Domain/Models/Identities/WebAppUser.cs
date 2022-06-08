@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Forum.Domain.Models.Identities
 {
-    public class WebAppUser : IdentityUser//TODO: Przenieść Modele BD do folderu MODEL
+    public class WebAppUser : IdentityUser
     {
         public int UserId { get; set; }
         public virtual AppUser User { get; set; }
@@ -46,6 +46,14 @@ namespace Forum.Domain.Models.Identities
         public virtual WebAppUser User { get; set; }
         public virtual WebAppRole Role { get; set; }
     }
+
+    /*public class WebAppUserRole : IdentityUserRole<string>
+    {
+        public Guid UserId { get; set; }
+        public Guid RoleId { get; set; }
+        public virtual WebAppUser User { get; set; }
+        public virtual WebAppRole Role { get; set; }
+    }*/
 
     public class WebAppUserClaims : IdentityUserClaim<string>
     {

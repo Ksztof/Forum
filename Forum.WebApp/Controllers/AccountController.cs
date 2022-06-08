@@ -96,6 +96,7 @@ namespace Forum.WebApp.Controllers
 
             if (user == null)
             {
+
                 var errorContent = "User object is missing data";
                 return RedirectToAction("ShowError", new ErrorFM
                 {
@@ -110,6 +111,8 @@ namespace Forum.WebApp.Controllers
             var createResult = _usrManager.CreateAsync(webAppUser, model.Password).Result;*/
 
             var createResult = _accountService.Add(model, appUser);
+            
+            
 
             if (!createResult.Succeeded)
             {

@@ -20,7 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 //++++++++
 builder.Services.AddTransient<IAppUserService, AppUserService>();
-builder.Services.AddTransient<IUserProfileService, UserProfileService>();//to przerobioć//zapomniałem co?
+builder.Services.AddTransient<IUserProfileService, UserProfileService>();
 builder.Services.AddTransient<IAnswerService, AnswerService>();
 builder.Services.AddTransient<IQuestionService, QuestionService>();
 builder.Services.AddTransient<ICommentToAnswerService, CommentToAnswerService>();
@@ -35,8 +35,8 @@ builder.Services.AddIdentity<WebAppUser, WebAppRole>()
     .AddDefaultTokenProviders();        //generate password reset token (email change etc.)
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = /*ściezka do logowania*/"/Account";
-    options.ExpireTimeSpan = TimeSpan.FromHours(2);// długośc sesji
+    options.LoginPath = "/Account";
+    options.ExpireTimeSpan = TimeSpan.FromHours(2);
     options.AccessDeniedPath = "/Account";
 });
 

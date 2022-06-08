@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Forum.Domain.Migrations
 {
-    public partial class migr : Migration
+    public partial class fixedIdentTables2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -218,7 +218,7 @@ namespace Forum.Domain.Migrations
                 {
                     UserId = table.Column<string>(type: "text", nullable: false),
                     RoleId = table.Column<string>(type: "text", nullable: false),
-                    UserId1 = table.Column<string>(type: "text", nullable: false),
+                    UserId1 = table.Column<string>(type: "text", nullable: true),
                     RoleId1 = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -246,8 +246,7 @@ namespace Forum.Domain.Migrations
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId1",
                         column: x => x.UserId1,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -394,6 +393,11 @@ namespace Forum.Domain.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "6e4f82f3-9bf7-4cfb-82f4-1327494fc3d5", "935f90aa-d116-40ae-a7cf-014d2ac781a7", "Admin", "ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Answers_AppUserId",

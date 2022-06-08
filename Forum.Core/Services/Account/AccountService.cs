@@ -17,10 +17,13 @@ namespace Forum.Core.Services.Account
     {
         private UserManager<WebAppUser> _usrManager;
         private IAppUserService _appUserService;
-        public AccountService(UserManager<WebAppUser> usrManger, IAppUserService appUserService)
+        private RoleManager<WebAppRole> roleManager;
+
+        public AccountService(UserManager<WebAppUser> usrManger, IAppUserService appUserService, RoleManager<WebAppRole> roleManager)
         {
             this._usrManager = usrManger;
             this._appUserService = appUserService;
+            this.roleManager = roleManager;     
         }
 
         public IdentityResult Add(RegisterFM model, Domain.Models.AppUser appUser)
@@ -29,7 +32,12 @@ namespace Forum.Core.Services.Account
             webAppUser.Email = model.Email;
             webAppUser.UserName = model.UserName;
             webAppUser.UserId = appUser.Id;
+
+            
+
             var createResult = _usrManager.CreateAsync(webAppUser, model.Password).Result;
+
+            var addToRole = _usrManager.AddToRoleAsync(webAppUser, "Admin").Result;
 
             return createResult;
         }

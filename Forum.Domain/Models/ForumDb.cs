@@ -1,4 +1,5 @@
 ﻿using Forum.Domain.Models.Identities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -41,7 +42,8 @@ namespace Forum.Domain.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder) // nadpisujemy metodę z dbcontext
         {
             base.OnModelCreating(modelBuilder);
-
+            //Roles 
+            modelBuilder.Entity<WebAppRole>().HasData(new WebAppRole { Name = "Admin", NormalizedName = "Admin".ToUpper() });
 
 
             modelBuilder.Entity<Question>()
@@ -91,6 +93,7 @@ namespace Forum.Domain.Models
                 .WithMany(a => a.CommentsToComment)
                 .HasForeignKey(ctc => ctc.AppUserId);
 
+            
             SeedBaseData(modelBuilder); // wstrzykuje dane 
 
 
@@ -124,9 +127,3 @@ namespace Forum.Domain.Models
 }
 
 
-/*
- 1. Jeden użytkownik może zadawać wiele pytań
- 2. Jeden uzytkownik może dać wiele odpowiedzi do pytania 
- 3. Jedno pytanie może mieć wiele komentarzy
- 4. Jeden komentarz może mieć wiele komentarzy do komentarza 
- */
