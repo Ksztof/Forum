@@ -93,8 +93,24 @@ namespace Forum.Domain.Models
                 .WithMany(a => a.CommentsToComment)
                 .HasForeignKey(ctc => ctc.AppUserId);
 
-            
-            SeedBaseData(modelBuilder); // wstrzykuje dane 
+            modelBuilder.Entity<WebAppUser>(b =>
+            {
+                b.HasMany(e => e.UserRoles)
+                    .WithOne(e => e.User)
+                    .HasForeignKey(ur => ur.UserId)
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity<WebAppRole>(b =>
+            {
+                b.HasMany(e => e.UserRoles)
+                    .WithOne(e => e.Role)
+                    .HasForeignKey(ur => ur.RoleId)
+                    .IsRequired();
+            });
+
+
+            SeedBaseData(modelBuilder); 
 
 
         }

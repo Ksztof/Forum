@@ -177,8 +177,8 @@ namespace Forum.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6e4f82f3-9bf7-4cfb-82f4-1327494fc3d5",
-                            ConcurrencyStamp = "935f90aa-d116-40ae-a7cf-014d2ac781a7",
+                            Id = "d8bf006d-3dea-488d-b9fa-01dfc8a399ae",
+                            ConcurrencyStamp = "6b521f2f-3f33-4807-8173-0e3e511b1e17",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -351,20 +351,9 @@ namespace Forum.Domain.Migrations
                     b.Property<string>("RoleId")
                         .HasColumnType("text");
 
-                    b.Property<string>("RoleId1")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserId1")
-                        .HasColumnType("text");
-
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("RoleId1");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
@@ -617,27 +606,17 @@ namespace Forum.Domain.Migrations
 
             modelBuilder.Entity("Forum.Domain.Models.Identities.WebAppUserRole", b =>
                 {
-                    b.HasOne("Forum.Domain.Models.Identities.WebAppRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Forum.Domain.Models.Identities.WebAppRole", "Role")
                         .WithMany("UserRoles")
-                        .HasForeignKey("RoleId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Forum.Domain.Models.Identities.WebAppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Forum.Domain.Models.Identities.WebAppUser", "User")
                         .WithMany("UserRoles")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Role");
 
